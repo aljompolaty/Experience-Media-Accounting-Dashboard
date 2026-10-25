@@ -10,46 +10,75 @@
         header { background-color: #1e293b; border-bottom: 1px solid #334155; padding: 1rem 1.5rem; }
         .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
         .logo-box { background-color: #f59e0b; color: #020617; font-weight: 900; padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-size: 1.25rem; }
-        .fx-bar { background-color: #020617; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.75rem 1rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 1rem; }
+        .fx-bar { background-color: #020617; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.75rem 1rem; border-radius: 0.75rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
         .fx-input { width: 80px; background-color: #1e293b; border: 1px solid #475569; color: #fcd34d; font-weight: bold; text-align: center; border-radius: 0.25rem; padding: 0.25rem; }
-        
-        .main-container { max-width: 1200px; margin: 1.5rem auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 1.5rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
-        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
 
-        .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1.25rem; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 0.75rem; margin-bottom: 1rem; }
-        .badge { background-color: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.6rem; border-radius: 9999px; }
-        
+        .main-container { max-width: 1200px; margin: 1.5rem auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.5rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 1.5rem; }
+        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+        .span-2 { grid-column: span 2; }
+        @media (max-width: 700px) { .span-2 { grid-column: auto; } }
+
+        .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1.25rem; min-width: 0; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; border-bottom: 1px solid #334155; padding-bottom: 0.75rem; margin-bottom: 1rem; }
+        .badge { background-color: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.6rem; border-radius: 9999px; white-space: nowrap; }
+
         .kpi-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; }
         .kpi-title { font-size: 0.75rem; color: #94a3b8; }
         .kpi-val { font-size: 1.25rem; font-weight: 800; margin-top: 0.5rem; }
         .kpi-sub { font-size: 0.65rem; color: #64748b; margin-top: 0.25rem; }
 
-        .alert-box { background-color: rgba(136, 19, 55, 0.4); border: 1px solid rgba(225, 29, 72, 0.5); border-radius: 1rem; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .alert-box { border-radius: 1rem; padding: 1rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; }
+        .alert-danger { background-color: rgba(136, 19, 55, 0.4); border: 1px solid rgba(225, 29, 72, 0.5); }
+        .alert-ok { background-color: rgba(6, 78, 59, 0.4); border: 1px solid rgba(16, 185, 129, 0.5); }
+        .alert-icon { color: white; border-radius: 50%; width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .alert-danger .alert-icon { background: #e11d48; }
+        .alert-ok .alert-icon { background: #059669; }
+        .alert-danger h3 { color: #fca5a5; }
+        .alert-ok h3 { color: #6ee7b7; }
+        .alert-danger .alert-value { color: #f43f5e; }
+        .alert-ok .alert-value { color: #34d399; }
 
         table { width: 100%; border-collapse: collapse; text-align: right; font-size: 0.8rem; }
-        th { background-color: #0f172a; color: #94a3b8; padding: 0.6rem; border-bottom: 1px solid #334155; }
+        th { background-color: #0f172a; color: #94a3b8; padding: 0.6rem; border-bottom: 1px solid #334155; white-space: nowrap; }
         td { padding: 0.6rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
         tr:hover { background-color: rgba(51, 65, 85, 0.3); }
+        .cell-title { font-weight: 600; min-width: 150px; }
+        .cell-date { font-size: 0.65rem; color: #64748b; margin-top: 0.15rem; }
+        .empty-row td { text-align: center; color: #64748b; padding: 1.25rem; }
+        .row-actions { white-space: nowrap; text-align: left; }
+        .icon-btn { background: transparent; border: 1px solid #475569; color: #cbd5e1; border-radius: 0.375rem; width: 26px; height: 26px; cursor: pointer; font-size: 0.8rem; }
+        .icon-btn:hover { background: #334155; }
+        .icon-btn.danger:hover { background: #e11d48; border-color: #e11d48; color: white; }
 
-        .btn { border: none; border-radius: 0.5rem; padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn { border: none; border-radius: 0.5rem; padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: 0.2s; white-space: nowrap; }
         .btn-green { background-color: #059669; color: white; }
         .btn-green:hover { background-color: #10b981; }
         .btn-red { background-color: #e11d48; color: white; }
         .btn-red:hover { background-color: #f43f5e; }
+        .btn-muted { background: #475569; color: white; }
 
         .progress-bar-bg { width: 100%; background-color: #0f172a; border-radius: 9999px; height: 0.75rem; overflow: hidden; border: 1px solid #334155; margin: 0.75rem 0; }
         .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #10b981); width: 0%; transition: width 0.3s; }
+
+        .tag { font-size: 0.6rem; color: white; padding: 0.1rem 0.3rem; border-radius: 0.2rem; margin-right: 0.25rem; }
+        .tag-breakeven { background: #e11d48; }
+        .tag-current { background: #0284c7; }
+        .row-breakeven { background: rgba(136, 19, 55, 0.4); color: #fca5a5; font-weight: bold; }
+        .row-current { background: rgba(2, 132, 199, 0.15); }
+        .matrix-note { font-size: 0.75rem; color: #94a3b8; margin-top: 0.75rem; }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 100; }
         .modal-body { background: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1.5rem; width: 100%; max-width: 400px; }
         .hidden { display: none !important; }
         .form-group { margin-bottom: 0.75rem; }
         .form-group label { display: block; font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.25rem; }
-        .form-group input, .form-group select { width: 100%; background: #0f172a; border: 1px solid #334155; color: white; padding: 0.5rem; border-radius: 0.375rem; font-size: 0.8rem; }
-        
+        .form-group input, .form-group select { width: 100%; background: #0f172a; border: 1px solid #334155; color: white; padding: 0.5rem; border-radius: 0.375rem; font-size: 0.8rem; color-scheme: dark; }
+        .form-hint { font-size: 0.65rem; color: #64748b; margin-top: 0.25rem; }
+        .form-error { font-size: 0.75rem; color: #fb7185; min-height: 1rem; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
+
         .text-amber { color: #fcd34d; }
         .text-emerald { color: #34d399; }
         .text-rose { color: #fb7185; }
@@ -67,12 +96,12 @@
                 </div>
             </div>
             <div class="fx-bar">
-                <span style="font-size: 0.75rem; font-weight: bold; color: #f59e0b;">سعر الصرف اليومي (سوق):</span>
+                <label for="fxRateInput" style="font-size: 0.75rem; font-weight: bold; color: #f59e0b;">سعر الصرف اليومي (سوق):</label>
                 <div style="display: flex; align-items: center; gap: 0.25rem;">
-                    <input type="number" id="fxRateInput" value="185" step="0.5" class="fx-input">
+                    <input type="number" id="fxRateInput" value="185" step="0.5" min="0.01" class="fx-input">
                     <span style="font-size: 0.7rem; color: #94a3b8;">ج.س / 1 ج.م</span>
                 </div>
-                <input type="range" id="fxRateSlider" min="150" max="300" step="1" value="185" style="width: 120px; accent-color: #f59e0b;">
+                <input type="range" id="fxRateSlider" min="150" max="300" step="1" value="185" aria-label="سعر الصرف" style="width: 120px; accent-color: #f59e0b;">
             </div>
         </div>
     </header>
@@ -84,64 +113,64 @@
                     <span class="badge" id="prjCode">PRJ-001</span>
                     <span style="font-size: 0.7rem; color: #94a3b8;">المشروع الفعلي المسجل</span>
                 </div>
-                <h2 style="font-size: 1.1rem; font-weight: bold;">العميل: شركة تينز</h2>
-                <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem;">الخدمة: تنفيذ 1000 تيشيرت مطبوع</p>
+                <h2 style="font-size: 1.1rem; font-weight: bold;" id="prjClient">العميل: —</h2>
+                <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem;" id="prjService">الخدمة: —</p>
                 <div style="margin-top: 1rem; font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.5rem;">
                     <div style="display: flex; justify-content: space-between; color: #94a3b8;">
                         <span>قيمة القطعة:</span>
-                        <span style="font-weight: bold; color: #f1f5f9;">31,000 ج.س</span>
+                        <span style="font-weight: bold; color: #f1f5f9;" id="unitPriceSdg">—</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; color: #94a3b8;">
                         <span>إجمالي التعاقد (ج.س):</span>
-                        <span style="font-weight: bold; color: #fcd34d;">31,000,000 ج.س</span>
+                        <span style="font-weight: bold; color: #fcd34d;" id="totalContractSdg">—</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; color: #94a3b8;">
                         <span>إجمالي العقد المعادل (ج.م):</span>
-                        <span style="font-weight: bold; color: #34d399;" id="totalContractEgp">171,892 ج.م</span>
+                        <span style="font-weight: bold; color: #34d399;" id="totalContractEgp">—</span>
                     </div>
                 </div>
             </div>
 
-            <div style="grid-column: span 2;" class="grid-kpi">
+            <div class="grid-kpi span-2">
                 <div class="kpi-card">
                     <span class="kpi-title">المحصل الفعلي (ج.م)</span>
-                    <div class="kpi-val text-emerald" id="kpiReceivedEgp">80,000 ج.م</div>
-                    <span class="kpi-sub">14,000,000 ج.س (مُثبّت 175)</span>
+                    <div class="kpi-val text-emerald" id="kpiReceivedEgp">—</div>
+                    <span class="kpi-sub" id="kpiReceivedSub">—</span>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-title">المتبقي عند العميل</span>
-                    <div class="kpi-val text-amber" id="kpiRemainingEgp">91,892 ج.م</div>
-                    <span class="kpi-sub">17,000,000 ج.س (سعر اليوم)</span>
+                    <div class="kpi-val text-amber" id="kpiRemainingEgp">—</div>
+                    <span class="kpi-sub" id="kpiRemainingSub">—</span>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-title">إجمالي التكلفة الفعلية</span>
-                    <div class="kpi-val text-rose" id="kpiTotalCostEgp">141,000 ج.م</div>
-                    <span class="kpi-sub" id="kpiCostPerPiece">141 ج.م / قطعة</span>
+                    <div class="kpi-val text-rose" id="kpiTotalCostEgp">—</div>
+                    <span class="kpi-sub" id="kpiCostPerPiece">—</span>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-title">صافي الربح المتوقع</span>
-                    <div class="kpi-val text-cyan" id="kpiNetProfitEgp">30,892 ج.م</div>
-                    <span class="kpi-sub text-emerald" id="kpiProfitMargin">هامش ربح: 18.0%</span>
+                    <div class="kpi-val text-cyan" id="kpiNetProfitEgp">—</div>
+                    <span class="kpi-sub text-emerald" id="kpiProfitMargin">—</span>
                 </div>
             </div>
         </div>
 
-        <div class="alert-box">
+        <div class="alert-box alert-danger" id="cashAlert">
             <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <div style="background: #e11d48; color: white; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: bold;">!</div>
+                <div class="alert-icon" id="cashAlertIcon">!</div>
                 <div>
-                    <h3 style="font-size: 0.85rem; font-weight: bold; color: #fca5a5;">العجز النقدي المتبقي لسداد المصنع والشحن</h3>
-                    <p style="font-size: 0.75rem; color: #cbd5e1;">المحصل الفعلي (80,000 ج.م) لا يغطي إجمالي التكلفة (141,000 ج.م). الفارق يُسدد عند تحصيل الدفعة المتبقية.</p>
+                    <h3 style="font-size: 0.85rem; font-weight: bold;" id="cashAlertTitle">—</h3>
+                    <p style="font-size: 0.75rem; color: #cbd5e1;" id="cashAlertText">—</p>
                 </div>
             </div>
-            <div style="font-size: 1.1rem; font-weight: 900; color: #f43f5e;" id="kpiCashDeficit">61,000 ج.م</div>
+            <div class="alert-value" style="font-size: 1.1rem; font-weight: 900;" id="cashAlertValue">—</div>
         </div>
 
         <div class="grid-2">
             <div class="card">
                 <div class="card-header">
                     <h3 style="font-size: 0.95rem; font-weight: bold; color: #34d399;">سجل الدفعات المحصلة (Historical FX Lock)</h3>
-                    <button onclick="togglePaymentModal()" class="btn btn-green">+ إضافة دفعة</button>
+                    <button type="button" data-action="add-payment" class="btn btn-green">+ إضافة دفعة</button>
                 </div>
                 <div style="overflow-x: auto;">
                     <table>
@@ -151,6 +180,7 @@
                                 <th>المبلغ (ج.س)</th>
                                 <th>سعر الصرف</th>
                                 <th>المعادل (ج.م)</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="paymentsTableBody"></tbody>
@@ -161,7 +191,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 style="font-size: 0.95rem; font-weight: bold; color: #fb7185;">سجل المصروفات والتكاليف</h3>
-                    <button onclick="toggleExpenseModal()" class="btn btn-red">+ إضافة مصروف</button>
+                    <button type="button" data-action="add-expense" class="btn btn-red">+ إضافة مصروف</button>
                 </div>
                 <div style="overflow-x: auto;">
                     <table>
@@ -169,8 +199,10 @@
                             <tr>
                                 <th>البند</th>
                                 <th>المبلغ الأصلي</th>
+                                <th>سعر الصرف</th>
                                 <th>المعادل (ج.م)</th>
                                 <th>المعادل (ج.س)</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="expensesTableBody"></tbody>
@@ -193,7 +225,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 style="font-size: 0.95rem; font-weight: bold; color: #38bdf8;">حساسية سعر الصرف للدفعة المتبقية (17,000,000 ج.س)</h3>
+                    <h3 style="font-size: 0.95rem; font-weight: bold; color: #38bdf8;" id="fxMatrixTitle">حساسية سعر الصرف للدفعة المتبقية</h3>
                 </div>
                 <div style="overflow-x: auto;">
                     <table style="text-align: center;">
@@ -209,6 +241,7 @@
                         <tbody id="fxMatrixBody"></tbody>
                     </table>
                 </div>
+                <p class="matrix-note" id="fxMatrixNote"></p>
                 <div style="margin-top: 1rem; height: 180px; position: relative;">
                     <canvas id="profitChartCanvas" style="width: 100%; height: 100%;"></canvas>
                 </div>
@@ -216,64 +249,85 @@
         </div>
     </main>
 
-    <div id="paymentModal" class="modal-overlay hidden">
-        <div class="modal-body">
-            <h3 style="font-size: 1rem; font-weight: bold; color: #34d399; margin-bottom: 1rem;">إضافة دفعة جديدة</h3>
+    <div id="paymentModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
+        <form class="modal-body" id="paymentForm" novalidate>
+            <h3 id="paymentModalTitle" style="font-size: 1rem; font-weight: bold; color: #34d399; margin-bottom: 1rem;">إضافة دفعة جديدة</h3>
             <div class="form-group">
-                <label>بيان الدفعة</label>
+                <label for="payTitle">بيان الدفعة</label>
                 <input type="text" id="payTitle" placeholder="مثال: الدفعة الثانية">
             </div>
             <div class="form-group">
-                <label>المبلغ (بالجنيه السوداني SDG)</label>
-                <input type="number" id="paySdg" placeholder="1000000">
+                <label for="payDate">تاريخ التحصيل</label>
+                <input type="date" id="payDate">
             </div>
             <div class="form-group">
-                <label>سعر الصرف المربوط (Historical Rate)</label>
-                <input type="number" id="payFx" value="185">
+                <label for="paySdg">المبلغ (بالجنيه السوداني SDG)</label>
+                <input type="number" id="paySdg" placeholder="1000000" min="0" step="any">
             </div>
-            <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
-                <button onclick="togglePaymentModal()" class="btn" style="background: #475569; color: white;">إلغاء</button>
-                <button onclick="addPayment()" class="btn btn-green">حفظ الدفعة</button>
+            <div class="form-group">
+                <label for="payFx">سعر الصرف المربوط (Historical Rate)</label>
+                <input type="number" id="payFx" min="0" step="any">
+                <p class="form-hint">سعر يوم التحصيل، ويبقى ثابتًا لهذه الدفعة مهما تغيّر سعر السوق.</p>
             </div>
-        </div>
+            <p class="form-error" id="paymentError" role="alert"></p>
+            <div class="modal-actions">
+                <button type="button" data-action="close-modal" class="btn btn-muted">إلغاء</button>
+                <button type="submit" class="btn btn-green">حفظ الدفعة</button>
+            </div>
+        </form>
     </div>
 
-    <div id="expenseModal" class="modal-overlay hidden">
-        <div class="modal-body">
-            <h3 style="font-size: 1rem; font-weight: bold; color: #fb7185; margin-bottom: 1rem;">إضافة مصروف جديد</h3>
+    <div id="expenseModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="expenseModalTitle">
+        <form class="modal-body" id="expenseForm" novalidate>
+            <h3 id="expenseModalTitle" style="font-size: 1rem; font-weight: bold; color: #fb7185; margin-bottom: 1rem;">إضافة مصروف جديد</h3>
             <div class="form-group">
-                <label>بند المصروف</label>
+                <label for="expTitle">بند المصروف</label>
                 <input type="text" id="expTitle" placeholder="مثال: مصاريف نثرية">
             </div>
             <div class="form-group">
-                <label>المبلغ</label>
-                <input type="number" id="expAmount" placeholder="5000">
+                <label for="expDate">تاريخ الصرف</label>
+                <input type="date" id="expDate">
             </div>
             <div class="form-group">
-                <label>العملة</label>
+                <label for="expAmount">المبلغ</label>
+                <input type="number" id="expAmount" placeholder="5000" min="0" step="any">
+            </div>
+            <div class="form-group">
+                <label for="expCurrency">العملة</label>
                 <select id="expCurrency">
                     <option value="EGP">جنيه مصري (EGP)</option>
                     <option value="SDG">جنيه سوداني (SDG)</option>
                 </select>
             </div>
-            <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
-                <button onclick="toggleExpenseModal()" class="btn" style="background: #475569; color: white;">إلغاء</button>
-                <button onclick="addExpense()" class="btn btn-red">حفظ المصروف</button>
+            <div class="form-group">
+                <label for="expFx">سعر الصرف المثبّت (ج.س / 1 ج.م)</label>
+                <input type="number" id="expFx" min="0" step="any">
+                <p class="form-hint">سعر يوم الصرف، ويُستخدم لتحويل المصروف إلى العملة الأخرى بشكل ثابت.</p>
             </div>
-        </div>
+            <p class="form-error" id="expenseError" role="alert"></p>
+            <div class="modal-actions">
+                <button type="button" data-action="close-modal" class="btn btn-muted">إلغاء</button>
+                <button type="submit" class="btn btn-red">حفظ المصروف</button>
+            </div>
+        </form>
     </div>
 
     <script>
+        const STORAGE_KEY = 'exp_media_dashboard';
+        const SCHEMA_VERSION = 2;
+
         const defaultData = {
+            version: SCHEMA_VERSION,
             fxRate: 185,
+            project: { code: 'PRJ-001', client: 'شركة تينز', service: 'تنفيذ 1000 تيشيرت مطبوع' },
             contractSdg: 31000000,
             quantity: 1000,
             payments: [
-                { id: 1, title: 'الدفعة الأولى المقدمة', sdg: 14000000, fxRate: 175 }
+                { id: 1, title: 'الدفعة الأولى المقدمة', date: null, sdg: 14000000, fxRate: 175 }
             ],
             expenses: [
-                { id: 1, title: 'تكلفة المصنع (تصنيع وطباعة 1000 تيشيرت × 130 ج.م)', amount: 130000, currency: 'EGP' },
-                { id: 2, title: 'تكلفة الشحن والتخليص', amount: 11000, currency: 'EGP' }
+                { id: 1, title: 'تكلفة المصنع (تصنيع وطباعة 1000 تيشيرت × 130 ج.م)', date: null, amount: 130000, currency: 'EGP', fxRate: 185 },
+                { id: 2, title: 'تكلفة الشحن والتخليص', date: null, amount: 11000, currency: 'EGP', fxRate: 185 }
             ],
             workflow: [
                 { id: 1, name: '1. استلام أمر الشراء والتصميم المعمد', status: 'completed' },
@@ -285,101 +339,231 @@
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('exp_media_dashboard')) || defaultData;
+        function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
+
+        // v1 (no version field) had no dates, and SDG expenses floated with the market rate.
+        // They are locked at the rate saved with the data at migration time.
+        function migrate(data) {
+            if (!data.version || data.version < 2) {
+                const lockRate = parseFloat(data.fxRate) || defaultData.fxRate;
+                data.payments = (data.payments || []).map(p => ({ date: null, ...p }));
+                data.expenses = (data.expenses || []).map(e => ({ date: null, fxRate: lockRate, ...e }));
+                data.version = 2;
+            }
+            return data;
+        }
+
+        function loadData() {
+            let stored = null;
+            try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (err) { stored = null; }
+            if (!stored || typeof stored !== 'object') return clone(defaultData);
+            const storedVersion = stored.version;
+            const data = migrate(stored);
+            Object.keys(defaultData).forEach(key => {
+                if (data[key] === undefined) data[key] = clone(defaultData[key]);
+            });
+            // Persist right away so the locked migration rate can't drift on a later load.
+            if (storedVersion !== data.version) {
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (err) { /* storage unavailable */ }
+            }
+            return data;
+        }
+
+        let appData = loadData();
 
         function saveData() {
-            localStorage.setItem('exp_media_dashboard', JSON.stringify(appData));
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+            } catch (err) {
+                console.error('تعذر حفظ البيانات في المتصفح', err);
+            }
             render();
         }
 
+        // Leading LRM keeps the minus sign on the left inside RTL text.
         function formatNum(num) {
-            return new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(num);
+            return '‎' + new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(num);
+        }
+
+        function formatCompact(num) {
+            return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(num);
+        }
+
+        function formatDate(iso) {
+            if (!iso) return 'بدون تاريخ';
+            const [y, m, d] = iso.split('-');
+            return `${d}/${m}/${y}`;
+        }
+
+        function todayIso() {
+            const now = new Date();
+            return new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+        }
+
+        function byDate(a, b) {
+            return (a.date || '').localeCompare(b.date || '') || a.id - b.id;
+        }
+
+        function expenseValues(e) {
+            return {
+                egp: e.currency === 'EGP' ? e.amount : e.amount / e.fxRate,
+                sdg: e.currency === 'SDG' ? e.amount : e.amount * e.fxRate
+            };
+        }
+
+        // Rate at which the open SDG balance exactly covers the remaining cost gap.
+        // null when no rate changes the outcome (gap already covered, or nothing left to collect).
+        function calcBreakEven(openSdg, cashGap) {
+            if (openSdg <= 0 || cashGap <= 0) return null;
+            return openSdg / cashGap;
+        }
+
+        function actionButtons(kind, id) {
+            return `
+                <td class="row-actions">
+                    <button type="button" class="icon-btn" data-action="edit-${kind}" data-id="${id}" title="تعديل" aria-label="تعديل">✎</button>
+                    <button type="button" class="icon-btn danger" data-action="delete-${kind}" data-id="${id}" title="حذف" aria-label="حذف">✕</button>
+                </td>`;
         }
 
         function render() {
             const currentFx = parseFloat(appData.fxRate);
-            document.getElementById('fxRateInput').value = currentFx;
-            document.getElementById('fxRateSlider').value = currentFx;
+            const fxInput = document.getElementById('fxRateInput');
+            const fxSlider = document.getElementById('fxRateSlider');
+            if (document.activeElement !== fxInput) fxInput.value = currentFx;
+            fxSlider.max = Math.max(300, Math.ceil(currentFx));
+            fxSlider.value = currentFx;
 
             let totalReceivedEgp = 0;
             let totalReceivedSdg = 0;
-            const paymentsTbody = document.getElementById('paymentsTableBody');
-            paymentsTbody.innerHTML = '';
-
-            appData.payments.forEach(p => {
+            const paymentRows = [...appData.payments].sort(byDate).map(p => {
                 const egpVal = p.sdg / p.fxRate;
                 totalReceivedEgp += egpVal;
                 totalReceivedSdg += p.sdg;
-                paymentsTbody.innerHTML += `
+                return `
                     <tr>
-                        <td style="font-weight: 600;">${p.title}</td>
+                        <td><div class="cell-title">${escapeHtml(p.title)}</div><div class="cell-date">${formatDate(p.date)}</div></td>
                         <td class="text-amber">${formatNum(p.sdg)} ج.س</td>
-                        <td style="color: #94a3b8;">${p.fxRate}</td>
+                        <td style="color: #94a3b8;">${formatNum(p.fxRate)}</td>
                         <td class="text-emerald" style="font-weight: bold;">${formatNum(egpVal)} ج.م</td>
-                    </tr>
-                `;
+                        ${actionButtons('payment', p.id)}
+                    </tr>`;
             });
+            document.getElementById('paymentsTableBody').innerHTML = paymentRows.length
+                ? paymentRows.join('')
+                : '<tr class="empty-row"><td colspan="5">لا توجد دفعات مسجلة</td></tr>';
 
             const remainingSdg = appData.contractSdg - totalReceivedSdg;
-            const remainingEgpAtCurrentFx = remainingSdg / currentFx;
+            const openSdg = Math.max(0, remainingSdg);
+            const remainingEgpAtCurrentFx = openSdg / currentFx;
             const totalContractEgpEquivalent = totalReceivedEgp + remainingEgpAtCurrentFx;
 
             let totalCostEgp = 0;
-            const expensesTbody = document.getElementById('expensesTableBody');
-            expensesTbody.innerHTML = '';
-
-            appData.expenses.forEach(e => {
-                let egpVal = e.currency === 'EGP' ? e.amount : e.amount / currentFx;
-                let sdgVal = e.currency === 'SDG' ? e.amount : e.amount * currentFx;
-                totalCostEgp += egpVal;
-                expensesTbody.innerHTML += `
+            const expenseRows = [...appData.expenses].sort(byDate).map(e => {
+                const { egp, sdg } = expenseValues(e);
+                totalCostEgp += egp;
+                return `
                     <tr>
-                        <td style="font-weight: 600;">${e.title}</td>
+                        <td><div class="cell-title">${escapeHtml(e.title)}</div><div class="cell-date">${formatDate(e.date)}</div></td>
                         <td style="color: #cbd5e1;">${formatNum(e.amount)} ${e.currency === 'EGP' ? 'ج.م' : 'ج.س'}</td>
-                        <td class="text-rose" style="font-weight: bold;">${formatNum(egpVal)} ج.م</td>
-                        <td style="color: #94a3b8;">${formatNum(sdgVal)} ج.س</td>
-                    </tr>
-                `;
+                        <td style="color: #94a3b8;">${formatNum(e.fxRate)}</td>
+                        <td class="text-rose" style="font-weight: bold;">${formatNum(egp)} ج.م</td>
+                        <td style="color: #94a3b8;">${formatNum(sdg)} ج.س</td>
+                        ${actionButtons('expense', e.id)}
+                    </tr>`;
             });
+            document.getElementById('expensesTableBody').innerHTML = expenseRows.length
+                ? expenseRows.join('')
+                : '<tr class="empty-row"><td colspan="6">لا توجد مصروفات مسجلة</td></tr>';
 
-            const costPerPiece = totalCostEgp / appData.quantity;
-            const cashDeficit = totalCostEgp - totalReceivedEgp;
+            const costPerPiece = appData.quantity > 0 ? totalCostEgp / appData.quantity : 0;
+            const cashGap = totalCostEgp - totalReceivedEgp;
             const expectedNetProfitEgp = totalContractEgpEquivalent - totalCostEgp;
-            const profitMargin = (expectedNetProfitEgp / totalContractEgpEquivalent) * 100;
+            const profitMargin = totalContractEgpEquivalent > 0 ? (expectedNetProfitEgp / totalContractEgpEquivalent) * 100 : 0;
+            const avgLockedFx = totalReceivedEgp > 0 ? totalReceivedSdg / totalReceivedEgp : 0;
 
+            const project = appData.project;
+            document.getElementById('prjCode').innerText = project.code;
+            document.getElementById('prjClient').innerText = `العميل: ${project.client}`;
+            document.getElementById('prjService').innerText = `الخدمة: ${project.service}`;
+            document.getElementById('unitPriceSdg').innerText = `${formatNum(appData.quantity > 0 ? appData.contractSdg / appData.quantity : 0)} ج.س`;
+            document.getElementById('totalContractSdg').innerText = `${formatNum(appData.contractSdg)} ج.س`;
             document.getElementById('totalContractEgp').innerText = `${formatNum(totalContractEgpEquivalent)} ج.م`;
+
             document.getElementById('kpiReceivedEgp').innerText = `${formatNum(totalReceivedEgp)} ج.م`;
+            document.getElementById('kpiReceivedSub').innerText = totalReceivedSdg > 0
+                ? `${formatNum(totalReceivedSdg)} ج.س (متوسط مُثبّت ${formatNum(avgLockedFx)})`
+                : 'لا توجد دفعات بعد';
             document.getElementById('kpiRemainingEgp').innerText = `${formatNum(remainingEgpAtCurrentFx)} ج.م`;
+            document.getElementById('kpiRemainingSub').innerText = `${formatNum(openSdg)} ج.س (سعر اليوم ${formatNum(currentFx)})`;
             document.getElementById('kpiTotalCostEgp').innerText = `${formatNum(totalCostEgp)} ج.م`;
             document.getElementById('kpiCostPerPiece').innerText = `${formatNum(costPerPiece)} ج.م / قطعة`;
-            document.getElementById('kpiNetProfitEgp').innerText = `${formatNum(expectedNetProfitEgp)} ج.م`;
-            document.getElementById('kpiProfitMargin').innerText = `هامش ربح: ${profitMargin.toFixed(1)}%`;
-            document.getElementById('kpiCashDeficit').innerText = `${formatNum(Math.max(0, cashDeficit))} ج.م`;
 
+            const profitEl = document.getElementById('kpiNetProfitEgp');
+            profitEl.innerText = `${formatNum(expectedNetProfitEgp)} ج.م`;
+            profitEl.className = `kpi-val ${expectedNetProfitEgp >= 0 ? 'text-cyan' : 'text-rose'}`;
+            const marginEl = document.getElementById('kpiProfitMargin');
+            marginEl.innerText = `هامش ربح: ${profitMargin.toFixed(1)}%`;
+            marginEl.className = `kpi-sub ${profitMargin >= 0 ? 'text-emerald' : 'text-rose'}`;
+
+            renderCashAlert(remainingSdg, cashGap, totalReceivedEgp, totalCostEgp);
             renderWorkflow();
-            renderFxMatrix(remainingSdg, totalReceivedEgp, totalCostEgp);
+            renderFxMatrix(openSdg, totalReceivedEgp, totalCostEgp, cashGap, currentFx);
+        }
+
+        function renderCashAlert(remainingSdg, cashGap, totalReceivedEgp, totalCostEgp) {
+            let state;
+            if (remainingSdg < 0) {
+                state = {
+                    ok: false,
+                    title: 'المحصل يتجاوز قيمة العقد',
+                    text: `تم تسجيل دفعات بقيمة تزيد عن إجمالي التعاقد (${formatNum(appData.contractSdg)} ج.س). راجع سجل الدفعات.`,
+                    value: `${formatNum(-remainingSdg)} ج.س`
+                };
+            } else if (cashGap > 0) {
+                state = {
+                    ok: false,
+                    title: 'العجز النقدي المتبقي لسداد التكاليف',
+                    text: `المحصل الفعلي (${formatNum(totalReceivedEgp)} ج.م) لا يغطي إجمالي التكلفة (${formatNum(totalCostEgp)} ج.م). الفارق يُسدد عند تحصيل الدفعة المتبقية.`,
+                    value: `${formatNum(cashGap)} ج.م`
+                };
+            } else {
+                state = {
+                    ok: true,
+                    title: 'التكاليف مغطاة بالكامل من المحصل',
+                    text: `المحصل الفعلي (${formatNum(totalReceivedEgp)} ج.م) يغطي إجمالي التكلفة (${formatNum(totalCostEgp)} ج.م) والفائض متاح.`,
+                    value: `+${formatNum(-cashGap)} ج.م`
+                };
+            }
+            document.getElementById('cashAlert').className = `alert-box ${state.ok ? 'alert-ok' : 'alert-danger'}`;
+            document.getElementById('cashAlertIcon').innerText = state.ok ? '✓' : '!';
+            document.getElementById('cashAlertTitle').innerText = state.title;
+            document.getElementById('cashAlertText').innerText = state.text;
+            document.getElementById('cashAlertValue').innerText = state.value;
         }
 
         function renderWorkflow() {
             const container = document.getElementById('workflowStepsContainer');
-            container.innerHTML = '';
             let completedCount = 0;
 
-            appData.workflow.forEach((step) => {
+            container.innerHTML = appData.workflow.map(step => {
                 if (step.status === 'completed') completedCount++;
-                container.innerHTML += `
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.6); padding: 0.5rem; border-radius: 0.5rem; border: 1px solid rgba(51, 65, 85, 0.5);">
-                        <span style="${step.status === 'completed' ? 'text-decoration: line-through; color: #64748b;' : 'color: #f1f5f9;'}">${step.name}</span>
-                        <select onchange="updateStepStatus(${step.id}, this.value)" style="background: #1e293b; border: 1px solid #475569; color: white; border-radius: 0.25rem; font-size: 0.7rem; padding: 0.2rem;">
+                return `
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; background: rgba(15, 23, 42, 0.6); padding: 0.5rem; border-radius: 0.5rem; border: 1px solid rgba(51, 65, 85, 0.5);">
+                        <span style="${step.status === 'completed' ? 'text-decoration: line-through; color: #64748b;' : 'color: #f1f5f9;'}">${escapeHtml(step.name)}</span>
+                        <select data-step-id="${step.id}" aria-label="حالة المرحلة" style="background: #1e293b; border: 1px solid #475569; color: white; border-radius: 0.25rem; font-size: 0.7rem; padding: 0.2rem;">
                             <option value="pending" ${step.status === 'pending' ? 'selected' : ''}>قيد الانتظار</option>
                             <option value="in_progress" ${step.status === 'in_progress' ? 'selected' : ''}>قيد التنفيذ</option>
                             <option value="completed" ${step.status === 'completed' ? 'selected' : ''}>مكتمل</option>
                         </select>
-                    </div>
-                `;
-            });
+                    </div>`;
+            }).join('');
 
-            const percent = Math.round((completedCount / appData.workflow.length) * 100);
+            const percent = appData.workflow.length ? Math.round((completedCount / appData.workflow.length) * 100) : 0;
             document.getElementById('workflowProgressText').innerText = `${percent}% مكتمل`;
             document.getElementById('workflowProgressBar').style.width = `${percent}%`;
         }
@@ -392,124 +576,273 @@
             }
         }
 
-        function renderFxMatrix(remainingSdg, totalReceivedEgp, totalCostEgp) {
-            const matrixRates = [175, 185, 200, 220, 250, 278.7];
-            const matrixBody = document.getElementById('fxMatrixBody');
-            matrixBody.innerHTML = '';
-
-            const chartPoints = [];
-
-            matrixRates.forEach(rate => {
-                const remEgp = remainingSdg / rate;
-                const totalContract = totalReceivedEgp + remEgp;
-                const profit = totalContract - totalCostEgp;
-                const margin = (profit / totalContract) * 100;
-                const isBreakEven = Math.abs(rate - 278.7) < 0.2;
-
-                chartPoints.push({ rate, profit: Math.round(profit) });
-
-                matrixBody.innerHTML += `
-                    <tr style="${isBreakEven ? 'background: rgba(136, 19, 55, 0.4); color: #fca5a5; font-weight: bold;' : ''}">
-                        <td>${rate} ${isBreakEven ? '<span style="font-size:0.6rem; background:#e11d48; color:white; padding:0.1rem 0.3rem; border-radius:0.2rem;">نقطة التعادل</span>' : ''}</td>
-                        <td>${formatNum(remEgp)}</td>
-                        <td>${formatNum(totalContract)}</td>
-                        <td style="${profit < 0 ? 'color:#f43f5e; font-weight:bold;' : 'color:#34d399; font-weight:bold;'}">${formatNum(profit)}</td>
-                        <td>${margin.toFixed(1)}%</td>
-                    </tr>
-                `;
-            });
-
-            drawCanvasChart(chartPoints);
+        function sensitivityRates(currentFx, breakEven) {
+            const rates = [currentFx, ...[0.9, 1.1, 1.25, 1.4, 1.6].map(f => Math.round(currentFx * f))];
+            if (breakEven) rates.push(breakEven);
+            return [...new Set(rates)].sort((a, b) => a - b);
         }
 
-        function drawCanvasChart(points) {
+        function renderFxMatrix(openSdg, totalReceivedEgp, totalCostEgp, cashGap, currentFx) {
+            const breakEven = calcBreakEven(openSdg, cashGap);
+            document.getElementById('fxMatrixTitle').innerText = `حساسية سعر الصرف للدفعة المتبقية (${formatNum(openSdg)} ج.س)`;
+
+            const chartPoints = [];
+            const rows = sensitivityRates(currentFx, breakEven).map(rate => {
+                const remEgp = openSdg / rate;
+                const totalContract = totalReceivedEgp + remEgp;
+                const rawProfit = totalContract - totalCostEgp;
+                const profit = Math.abs(rawProfit) < 0.01 ? 0 : rawProfit;
+                const margin = totalContract > 0 ? (profit / totalContract) * 100 : 0;
+                const isBreakEven = rate === breakEven;
+                const isCurrent = rate === currentFx;
+
+                // Keep far-off rates in the table but out of the chart so its scale stays readable.
+                if (rate <= currentFx * 2) chartPoints.push({ rate, profit });
+
+                const rowClass = isBreakEven ? 'row-breakeven' : (isCurrent ? 'row-current' : '');
+                return `
+                    <tr class="${rowClass}">
+                        <td>${formatNum(rate)}${isCurrent ? '<span class="tag tag-current">اليوم</span>' : ''}${isBreakEven ? '<span class="tag tag-breakeven">نقطة التعادل</span>' : ''}</td>
+                        <td>${formatNum(remEgp)}</td>
+                        <td>${formatNum(totalContract)}</td>
+                        <td style="${profit < 0 ? 'color:#f43f5e;' : 'color:#34d399;'} font-weight:bold;">${formatNum(profit)}</td>
+                        <td>${margin.toFixed(1)}%</td>
+                    </tr>`;
+            });
+            document.getElementById('fxMatrixBody').innerHTML = rows.join('');
+
+            let note;
+            if (breakEven) {
+                note = `نقطة التعادل: ${formatNum(breakEven)} ج.س / 1 ج.م. إذا تجاوز سعر الصرف هذا الرقم عند تحصيل المتبقي يتحول المشروع إلى خسارة.`;
+            } else if (openSdg <= 0) {
+                note = 'لا يوجد مبلغ متبقٍ عند العميل، فالنتيجة ثابتة ولا تتأثر بسعر الصرف.';
+            } else {
+                note = 'المحصل يغطي التكاليف بالكامل، فالمشروع رابح عند أي سعر صرف للدفعة المتبقية.';
+            }
+            document.getElementById('fxMatrixNote').innerText = note;
+
+            drawCanvasChart(chartPoints, breakEven && breakEven <= currentFx * 2 ? breakEven : null);
+        }
+
+        function drawCanvasChart(points, breakEven) {
             const canvas = document.getElementById('profitChartCanvas');
-            if(!canvas) return;
+            if (!canvas || points.length < 2) return;
             const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.clientWidth || 300;
-            canvas.height = canvas.parentElement.clientHeight || 180;
+            const dpr = window.devicePixelRatio || 1;
+            const cssW = canvas.parentElement.clientWidth || 300;
+            const cssH = canvas.parentElement.clientHeight || 180;
+            canvas.width = cssW * dpr;
+            canvas.height = cssH * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, cssW, cssH);
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const padL = 48, padR = 16, padT = 14, padB = 26;
+            const w = cssW - padL - padR;
+            const h = cssH - padT - padB;
 
-            const pad = 30;
-            const w = canvas.width - pad * 2;
-            const h = canvas.height - pad * 2;
+            const minR = points[0].rate;
+            const maxR = points[points.length - 1].rate;
+            const minP = Math.min(0, ...points.map(p => p.profit));
+            const maxP = Math.max(0, ...points.map(p => p.profit));
+            const xOf = rate => padL + ((rate - minR) / (maxR - minR || 1)) * w;
+            const yOf = profit => padT + h - ((profit - minP) / (maxP - minP || 1)) * h;
 
-            const minP = Math.min(...points.map(p => p.profit));
-            const maxP = Math.max(...points.map(p => p.profit));
+            ctx.direction = 'ltr';
+            ctx.font = '10px sans-serif';
+            ctx.fillStyle = '#64748b';
+            ctx.textAlign = 'right';
+            ctx.fillText(formatCompact(maxP), padL - 6, yOf(maxP) + 3);
+            ctx.fillText(formatCompact(minP), padL - 6, yOf(minP) + 3);
 
             ctx.strokeStyle = '#334155';
             ctx.lineWidth = 1;
+            ctx.setLineDash([]);
             ctx.beginPath();
-            ctx.moveTo(pad, pad);
-            ctx.lineTo(pad, canvas.height - pad);
-            ctx.lineTo(canvas.width - pad, canvas.height - pad);
+            ctx.moveTo(padL, padT);
+            ctx.lineTo(padL, padT + h);
+            ctx.lineTo(padL + w, padT + h);
             ctx.stroke();
+
+            // Zero-profit line
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = '#475569';
+            ctx.beginPath();
+            ctx.moveTo(padL, yOf(0));
+            ctx.lineTo(padL + w, yOf(0));
+            ctx.stroke();
+            ctx.fillText('0', padL - 6, yOf(0) + 3);
+
+            if (breakEven) {
+                ctx.strokeStyle = '#e11d48';
+                ctx.beginPath();
+                ctx.moveTo(xOf(breakEven), padT);
+                ctx.lineTo(xOf(breakEven), padT + h);
+                ctx.stroke();
+            }
+            ctx.setLineDash([]);
 
             ctx.strokeStyle = '#38bdf8';
             ctx.lineWidth = 3;
             ctx.beginPath();
-
-            const coords = points.map((p, idx) => {
-                const x = pad + (idx / (points.length - 1)) * w;
-                const y = canvas.height - pad - ((p.profit - minP) / (maxP - minP || 1)) * h;
-                return { x, y, profit: p.profit, rate: p.rate };
-            });
-
-            coords.forEach((c, idx) => {
-                if (idx === 0) ctx.moveTo(c.x, c.y);
-                else ctx.lineTo(c.x, c.y);
+            points.forEach((p, idx) => {
+                if (idx === 0) ctx.moveTo(xOf(p.rate), yOf(p.profit));
+                else ctx.lineTo(xOf(p.rate), yOf(p.profit));
             });
             ctx.stroke();
 
-            coords.forEach(c => {
-                ctx.fillStyle = c.profit <= 0 ? '#f43f5e' : '#10b981';
+            ctx.textAlign = 'center';
+            let lastLabelX = -Infinity;
+            points.forEach(p => {
+                const x = xOf(p.rate);
+                ctx.fillStyle = p.profit < 0 ? '#f43f5e' : '#10b981';
                 ctx.beginPath();
-                ctx.arc(c.x, c.y, 5, 0, Math.PI * 2);
+                ctx.arc(x, yOf(p.profit), 4, 0, Math.PI * 2);
                 ctx.fill();
 
-                ctx.fillStyle = '#94a3b8';
-                ctx.font = '10px sans-serif';
-                ctx.fillText(c.rate, c.x - 10, canvas.height - pad + 15);
+                if (x - lastLabelX >= 30) {
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.fillText(formatNum(p.rate), x, padT + h + 15);
+                    lastLabelX = x;
+                }
             });
         }
 
-        document.getElementById('fxRateInput').addEventListener('input', (e) => {
-            appData.fxRate = parseFloat(e.target.value) || 1;
+        // ---------- Modals ----------
+        const editing = { payment: null, expense: null };
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            const first = modal.querySelector('input');
+            if (first) first.focus();
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
+        }
+
+        function openPaymentModal(id) {
+            const p = id ? appData.payments.find(x => x.id === id) : null;
+            editing.payment = p ? p.id : null;
+            document.getElementById('paymentModalTitle').innerText = p ? 'تعديل الدفعة' : 'إضافة دفعة جديدة';
+            document.getElementById('payTitle').value = p ? p.title : '';
+            document.getElementById('payDate').value = p ? (p.date || '') : todayIso();
+            document.getElementById('paySdg').value = p ? p.sdg : '';
+            document.getElementById('payFx').value = p ? p.fxRate : appData.fxRate;
+            document.getElementById('paymentError').innerText = '';
+            openModal('paymentModal');
+        }
+
+        function openExpenseModal(id) {
+            const e = id ? appData.expenses.find(x => x.id === id) : null;
+            editing.expense = e ? e.id : null;
+            document.getElementById('expenseModalTitle').innerText = e ? 'تعديل المصروف' : 'إضافة مصروف جديد';
+            document.getElementById('expTitle').value = e ? e.title : '';
+            document.getElementById('expDate').value = e ? (e.date || '') : todayIso();
+            document.getElementById('expAmount').value = e ? e.amount : '';
+            document.getElementById('expCurrency').value = e ? e.currency : 'EGP';
+            document.getElementById('expFx').value = e ? e.fxRate : appData.fxRate;
+            document.getElementById('expenseError').innerText = '';
+            openModal('expenseModal');
+        }
+
+        function upsert(list, id, record) {
+            const idx = list.findIndex(x => x.id === id);
+            if (idx >= 0) list[idx] = { ...list[idx], ...record };
+            else list.push({ id: Date.now(), ...record });
+        }
+
+        function savePayment() {
+            const title = document.getElementById('payTitle').value.trim() || 'دفعة إضافية';
+            const date = document.getElementById('payDate').value;
+            const sdg = parseFloat(document.getElementById('paySdg').value);
+            const fxRate = parseFloat(document.getElementById('payFx').value);
+            const errorEl = document.getElementById('paymentError');
+
+            if (!date) return errorEl.innerText = 'حدّد تاريخ التحصيل.';
+            if (!(sdg > 0)) return errorEl.innerText = 'أدخل مبلغًا أكبر من صفر.';
+            if (!(fxRate > 0)) return errorEl.innerText = 'أدخل سعر صرف صحيحًا أكبر من صفر.';
+
+            upsert(appData.payments, editing.payment, { title, date, sdg, fxRate });
+            closeModals();
             saveData();
+        }
+
+        function saveExpense() {
+            const title = document.getElementById('expTitle').value.trim() || 'مصروف إضافي';
+            const date = document.getElementById('expDate').value;
+            const amount = parseFloat(document.getElementById('expAmount').value);
+            const currency = document.getElementById('expCurrency').value;
+            const fxRate = parseFloat(document.getElementById('expFx').value);
+            const errorEl = document.getElementById('expenseError');
+
+            if (!date) return errorEl.innerText = 'حدّد تاريخ الصرف.';
+            if (!(amount > 0)) return errorEl.innerText = 'أدخل مبلغًا أكبر من صفر.';
+            if (!(fxRate > 0)) return errorEl.innerText = 'أدخل سعر صرف صحيحًا أكبر من صفر.';
+
+            upsert(appData.expenses, editing.expense, { title, date, amount, currency, fxRate });
+            closeModals();
+            saveData();
+        }
+
+        function deleteRecord(listName, id, label) {
+            const record = appData[listName].find(x => x.id === id);
+            if (!record) return;
+            if (!confirm(`هل تريد حذف ${label} "${record.title}"؟ لا يمكن التراجع عن الحذف.`)) return;
+            appData[listName] = appData[listName].filter(x => x.id !== id);
+            saveData();
+        }
+
+        // ---------- Events ----------
+        document.addEventListener('click', (ev) => {
+            if (ev.target.classList.contains('modal-overlay')) return closeModals();
+            const btn = ev.target.closest('[data-action]');
+            if (!btn) return;
+            const id = btn.dataset.id ? Number(btn.dataset.id) : null;
+            switch (btn.dataset.action) {
+                case 'add-payment': return openPaymentModal(null);
+                case 'edit-payment': return openPaymentModal(id);
+                case 'delete-payment': return deleteRecord('payments', id, 'الدفعة');
+                case 'add-expense': return openExpenseModal(null);
+                case 'edit-expense': return openExpenseModal(id);
+                case 'delete-expense': return deleteRecord('expenses', id, 'المصروف');
+                case 'close-modal': return closeModals();
+            }
         });
+
+        document.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Escape') closeModals();
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', (ev) => { ev.preventDefault(); savePayment(); });
+        document.getElementById('expenseForm').addEventListener('submit', (ev) => { ev.preventDefault(); saveExpense(); });
+
+        document.getElementById('workflowStepsContainer').addEventListener('change', (ev) => {
+            const id = Number(ev.target.dataset.stepId);
+            if (id) updateStepStatus(id, ev.target.value);
+        });
+
+        const fxRateInput = document.getElementById('fxRateInput');
+        // Only commit valid rates while typing; an empty or partial field keeps the last good rate.
+        fxRateInput.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            if (value > 0) {
+                appData.fxRate = value;
+                saveData();
+            }
+        });
+        fxRateInput.addEventListener('blur', () => { fxRateInput.value = appData.fxRate; });
 
         document.getElementById('fxRateSlider').addEventListener('input', (e) => {
             appData.fxRate = parseFloat(e.target.value);
             saveData();
         });
 
-        function togglePaymentModal() { document.getElementById('paymentModal').classList.toggle('hidden'); }
-        function toggleExpenseModal() { document.getElementById('expenseModal').classList.toggle('hidden'); }
-
-        function addPayment() {
-            const title = document.getElementById('payTitle').value || 'دفعة إضافية';
-            const sdg = parseFloat(document.getElementById('paySdg').value) || 0;
-            const fxRate = parseFloat(document.getElementById('payFx').value) || appData.fxRate;
-            if (sdg > 0) {
-                appData.payments.push({ id: Date.now(), title, sdg, fxRate });
-                togglePaymentModal();
-                saveData();
-            }
-        }
-
-        function addExpense() {
-            const title = document.getElementById('expTitle').value || 'مصروف إضافي';
-            const amount = parseFloat(document.getElementById('expAmount').value) || 0;
-            const currency = document.getElementById('expCurrency').value;
-            if (amount > 0) {
-                appData.expenses.push({ id: Date.now(), title, amount, currency });
-                toggleExpenseModal();
-                saveData();
-            }
-        }
-
-        window.addEventListener('resize', () => render());
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(render, 150);
+        });
         render();
     </script>
 </body>
