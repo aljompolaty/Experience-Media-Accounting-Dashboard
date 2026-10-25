@@ -3,105 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experience Media - نظام حسابات وإدارة مشاريع شركة الدعاية والإعلان</title>
+    <title>Experience Media - نظام الحسابات وإدارة المشاريع</title>
+    <link rel="icon" href="brand/logo-mark-color.webp" type="image/webp">
+    <script>
+        // Apply the saved theme before first paint to avoid a flash of the wrong theme.
+        try {
+            const savedTheme = localStorage.getItem('exp_media_theme');
+            if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
+        } catch (err) { /* storage unavailable */ }
+    </script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; padding-bottom: 3rem; direction: rtl; text-align: right; }
-        header { background-color: #1e293b; border-bottom: 1px solid #334155; padding: 1rem 1.5rem; }
-        .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
-        .logo-box { background-color: #f59e0b; color: #020617; font-weight: 900; padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-size: 1.25rem; }
-        .fx-bar { background-color: #020617; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.75rem 1rem; border-radius: 0.75rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
-        .fx-input { width: 80px; background-color: #1e293b; border: 1px solid #475569; color: #fcd34d; font-weight: bold; text-align: center; border-radius: 0.25rem; padding: 0.25rem; }
+        /* Experience Media — Thmanyah brand fonts (local files, no external CDN per brand rules) */
+        @font-face { font-family: 'Thmanyah Sans'; src: url('fonts/thmanyahsans-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Thmanyah Sans'; src: url('fonts/thmanyahsans-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'Thmanyah Sans'; src: url('fonts/thmanyahsans-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+        @font-face { font-family: 'Thmanyah Sans'; src: url('fonts/thmanyahsans-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
 
-        .main-container { max-width: 1200px; margin: 1.5rem auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        /* Brand tokens — light (default) */
+        :root {
+            --xm-blue: #00ADEF;
+            --xm-blue-hover: #33BDF2;
+            --xm-graphite: #38393B;
+            --xm-ink: #151618;
+
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --surface-2: #f5f5f7;
+            --text: #151618;
+            --text-2: #38393B;
+            --muted: #6e6f73;
+            --line: #e4e4e8;
+            --brand-text: #0077A6;
+            --brand-tint: rgba(0, 173, 239, 0.10);
+            --pos: #0a8a5c;
+            --pos-tint: rgba(10, 138, 92, 0.10);
+            --neg: #d42a47;
+            --neg-tint: rgba(212, 42, 71, 0.09);
+            --warn: #b26a00;
+            --shadow: 0 1px 2px rgba(21, 22, 24, 0.05), 0 12px 32px rgba(21, 22, 24, 0.07);
+            --overlay: rgba(21, 22, 24, 0.55);
+            color-scheme: light;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0b0f15;
+                --surface: #1c1d1f;
+                --surface-2: #232426;
+                --text: #f5f5f7;
+                --text-2: #c9cacd;
+                --muted: #8d8e93;
+                --line: #2e2f33;
+                --brand-text: #4CC6F5;
+                --brand-tint: rgba(0, 173, 239, 0.14);
+                --pos: #34d399;
+                --pos-tint: rgba(52, 211, 153, 0.12);
+                --neg: #fb7185;
+                --neg-tint: rgba(251, 113, 133, 0.13);
+                --warn: #fbbf24;
+                --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+                --overlay: rgba(0, 0, 0, 0.7);
+                color-scheme: dark;
+            }
+        }
+        :root[data-theme="dark"] {
+            --bg: #0b0f15;
+            --surface: #1c1d1f;
+            --surface-2: #232426;
+            --text: #f5f5f7;
+            --text-2: #c9cacd;
+            --muted: #8d8e93;
+            --line: #2e2f33;
+            --brand-text: #4CC6F5;
+            --brand-tint: rgba(0, 173, 239, 0.14);
+            --pos: #34d399;
+            --pos-tint: rgba(52, 211, 153, 0.12);
+            --neg: #fb7185;
+            --neg-tint: rgba(251, 113, 133, 0.13);
+            --warn: #fbbf24;
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+            --overlay: rgba(0, 0, 0, 0.7);
+            color-scheme: dark;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Thmanyah Sans', 'IBM Plex Sans Arabic', Tahoma, system-ui, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; direction: rtl; text-align: right; font-variant-numeric: tabular-nums; }
+        button, input, select { font-family: inherit; }
+        ::selection { background: var(--xm-blue); color: var(--xm-ink); }
+
+        /* Header */
+        header { background-color: var(--surface); border-bottom: 3px solid var(--xm-blue); padding: 0.9rem 1.5rem; }
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+        .brand { display: flex; align-items: center; gap: 1rem; }
+        .brand-logo { height: 40px; width: auto; display: block; }
+        .logo-dark { display: none; }
+        :root[data-theme="dark"] .logo-light { display: none; }
+        :root[data-theme="dark"] .logo-dark { display: block; }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .logo-light { display: none; }
+            :root:not([data-theme="light"]) .logo-dark { display: block; }
+        }
+        .brand-divider { width: 1px; height: 36px; background: var(--line); }
+        .brand-title { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+        .brand-sub { font-size: 0.75rem; color: var(--muted); }
+        .header-tools { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+        .fx-bar { background-color: var(--surface-2); padding: 0.55rem 0.9rem; border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+        .fx-label { font-size: 0.8rem; font-weight: 700; color: var(--text-2); }
+        .fx-unit { font-size: 0.75rem; color: var(--muted); }
+        .fx-input { width: 84px; background-color: var(--surface); border: 1px solid var(--line); color: var(--brand-text); font-weight: 900; font-size: 0.95rem; text-align: center; border-radius: 4px; padding: 0.25rem; }
+        .fx-input:focus { outline: 2px solid var(--xm-blue); outline-offset: 1px; }
+        .fx-slider { width: 120px; accent-color: var(--xm-blue); }
+        .theme-toggle { background: var(--surface-2); color: var(--text-2); border: 0; border-radius: 12px; width: 40px; height: 40px; cursor: pointer; font-size: 1.05rem; }
+        .theme-toggle:hover { color: var(--brand-text); }
+
+        /* Layout */
+        .main-container { max-width: 1200px; margin: 1.75rem auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 1.5rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.5rem; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr)); gap: 1.5rem; }
-        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+        .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
         .span-2 { grid-column: span 2; }
         @media (max-width: 700px) { .span-2 { grid-column: auto; } }
 
-        .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1.25rem; min-width: 0; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; border-bottom: 1px solid #334155; padding-bottom: 0.75rem; margin-bottom: 1rem; }
-        .badge { background-color: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.6rem; border-radius: 9999px; white-space: nowrap; }
+        /* Borderless tonal cards with the static blue identity bar */
+        .card { background-color: var(--surface); border-radius: 18px; box-shadow: var(--shadow); padding: 1.5rem 1.25rem 1.25rem; position: relative; overflow: hidden; min-width: 0; }
+        .card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: var(--xm-blue); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; padding-bottom: 0.85rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line); }
+        .card-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+        .card-title small { font-weight: 500; color: var(--muted); font-size: 0.75rem; }
+        .badge { background-color: var(--brand-tint); color: var(--brand-text); font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 9999px; white-space: nowrap; }
 
-        .kpi-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; }
-        .kpi-title { font-size: 0.75rem; color: #94a3b8; }
-        .kpi-val { font-size: 1.25rem; font-weight: 800; margin-top: 0.5rem; }
-        .kpi-sub { font-size: 0.65rem; color: #64748b; margin-top: 0.25rem; }
+        .project-client { font-size: 1.2rem; font-weight: 900; }
+        .project-service { font-size: 0.9rem; color: var(--text-2); margin-top: 0.15rem; }
+        .meta-list { margin-top: 1rem; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .meta-row { display: flex; justify-content: space-between; color: var(--muted); }
+        .meta-row strong { color: var(--text); font-weight: 700; }
 
-        .alert-box { border-radius: 1rem; padding: 1rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; }
-        .alert-danger { background-color: rgba(136, 19, 55, 0.4); border: 1px solid rgba(225, 29, 72, 0.5); }
-        .alert-ok { background-color: rgba(6, 78, 59, 0.4); border: 1px solid rgba(16, 185, 129, 0.5); }
-        .alert-icon { color: white; border-radius: 50%; width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .alert-danger .alert-icon { background: #e11d48; }
-        .alert-ok .alert-icon { background: #059669; }
-        .alert-danger h3 { color: #fca5a5; }
-        .alert-ok h3 { color: #6ee7b7; }
-        .alert-danger .alert-value { color: #f43f5e; }
-        .alert-ok .alert-value { color: #34d399; }
+        .kpi-card { background-color: var(--surface); border-radius: 18px; box-shadow: var(--shadow); padding: 1.1rem; display: flex; flex-direction: column; justify-content: space-between; }
+        .kpi-title { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+        .kpi-val { font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 900; margin-top: 0.4rem; line-height: 1.3; white-space: nowrap; }
+        .kpi-sub { font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; }
 
-        table { width: 100%; border-collapse: collapse; text-align: right; font-size: 0.8rem; }
-        th { background-color: #0f172a; color: #94a3b8; padding: 0.6rem; border-bottom: 1px solid #334155; white-space: nowrap; }
-        td { padding: 0.6rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
-        tr:hover { background-color: rgba(51, 65, 85, 0.3); }
-        .cell-title { font-weight: 600; min-width: 150px; }
-        .cell-date { font-size: 0.65rem; color: #64748b; margin-top: 0.15rem; }
-        .empty-row td { text-align: center; color: #64748b; padding: 1.25rem; }
+        /* Cash alert */
+        .alert-box { border-radius: 18px; padding: 1rem 1.25rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; border-inline-start: 4px solid; }
+        .alert-danger { background-color: var(--neg-tint); border-color: var(--neg); }
+        .alert-ok { background-color: var(--pos-tint); border-color: var(--pos); }
+        .alert-icon { color: #ffffff; border-radius: 50%; width: 30px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+        .alert-danger .alert-icon { background: var(--neg); }
+        .alert-ok .alert-icon { background: var(--pos); }
+        .alert-title { font-size: 0.95rem; font-weight: 700; }
+        .alert-danger .alert-title, .alert-danger .alert-value { color: var(--neg); }
+        .alert-ok .alert-title, .alert-ok .alert-value { color: var(--pos); }
+        .alert-text { font-size: 0.8rem; color: var(--text-2); }
+        .alert-value { font-size: 1.3rem; font-weight: 900; }
+
+        /* Tables */
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: right; font-size: 0.85rem; }
+        th { background-color: var(--surface-2); color: var(--muted); font-weight: 500; font-size: 0.75rem; padding: 0.6rem; white-space: nowrap; }
+        th:first-child { border-start-start-radius: 8px; border-end-start-radius: 8px; }
+        th:last-child { border-start-end-radius: 8px; border-end-end-radius: 8px; }
+        td { padding: 0.65rem 0.6rem; border-bottom: 1px solid var(--line); }
+        td:not(:first-child) { white-space: nowrap; }
+        tbody tr:hover { background-color: var(--brand-tint); }
+        .cell-title { font-weight: 700; min-width: 150px; }
+        .cell-date { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+        .muted { color: var(--muted); }
+        .strong { font-weight: 700; }
+        .empty-row td { text-align: center; color: var(--muted); padding: 1.25rem; }
         .row-actions { white-space: nowrap; text-align: left; }
-        .icon-btn { background: transparent; border: 1px solid #475569; color: #cbd5e1; border-radius: 0.375rem; width: 26px; height: 26px; cursor: pointer; font-size: 0.8rem; }
-        .icon-btn:hover { background: #334155; }
-        .icon-btn.danger:hover { background: #e11d48; border-color: #e11d48; color: white; }
+        .icon-btn { background: transparent; border: 1px solid var(--line); color: var(--text-2); border-radius: 4px; width: 28px; height: 28px; cursor: pointer; font-size: 0.8rem; }
+        .icon-btn:hover { border-color: var(--xm-blue); color: var(--brand-text); }
+        .icon-btn.danger:hover { background: var(--neg); border-color: var(--neg); color: #ffffff; }
 
-        .btn { border: none; border-radius: 0.5rem; padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: 0.2s; white-space: nowrap; }
-        .btn-green { background-color: #059669; color: white; }
-        .btn-green:hover { background-color: #10b981; }
-        .btn-red { background-color: #e11d48; color: white; }
-        .btn-red:hover { background-color: #f43f5e; }
-        .btn-muted { background: #475569; color: white; }
+        /* Buttons — compact primary, graphite secondary */
+        .btn { border: 0; border-radius: 4px; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; white-space: nowrap; }
+        .btn:active { transform: scale(0.96); }
+        .btn-primary { background-color: var(--xm-blue); color: var(--xm-ink); }
+        .btn-primary:hover { background-color: var(--xm-blue-hover); }
+        .btn-secondary { background-color: var(--xm-graphite); color: #ffffff; }
+        .btn-secondary:hover { background-color: var(--xm-ink); }
+        .btn-quiet { background: transparent; color: var(--brand-text); }
 
-        .progress-bar-bg { width: 100%; background-color: #0f172a; border-radius: 9999px; height: 0.75rem; overflow: hidden; border: 1px solid #334155; margin: 0.75rem 0; }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #10b981); width: 0%; transition: width 0.3s; }
+        /* Workflow */
+        .progress-bar-bg { width: 100%; background-color: var(--surface-2); border-radius: 9999px; height: 0.6rem; overflow: hidden; margin: 0.25rem 0 1rem; }
+        .progress-bar-fill { height: 100%; background: var(--xm-blue); width: 0%; transition: width 0.3s; border-radius: 9999px; }
+        .steps { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem; }
+        .step { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; background: var(--surface-2); padding: 0.55rem 0.75rem; border-radius: 12px; }
+        .step-name { color: var(--text); }
+        .step.done .step-name { text-decoration: line-through; color: var(--muted); }
+        .step.active { box-shadow: inset -3px 0 0 var(--xm-blue); }
+        .step-select { background: var(--surface); border: 1px solid var(--line); color: var(--text); border-radius: 4px; font-size: 0.75rem; padding: 0.2rem 0.3rem; }
 
-        .tag { font-size: 0.6rem; color: white; padding: 0.1rem 0.3rem; border-radius: 0.2rem; margin-right: 0.25rem; }
-        .tag-breakeven { background: #e11d48; }
-        .tag-current { background: #0284c7; }
-        .row-breakeven { background: rgba(136, 19, 55, 0.4); color: #fca5a5; font-weight: bold; }
-        .row-current { background: rgba(2, 132, 199, 0.15); }
-        .matrix-note { font-size: 0.75rem; color: #94a3b8; margin-top: 0.75rem; }
+        /* FX sensitivity */
+        .tag { font-size: 0.65rem; padding: 0.05rem 0.35rem; border-radius: 4px; margin-right: 0.3rem; font-weight: 700; }
+        .tag-breakeven { background: var(--neg); color: #ffffff; }
+        .tag-current { background: var(--xm-blue); color: var(--xm-ink); }
+        .row-breakeven { background: var(--neg-tint); font-weight: 700; }
+        .row-current { background: var(--brand-tint); }
+        .matrix-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.75rem; }
+        .chart-box { margin-top: 1rem; height: 190px; position: relative; }
 
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 100; }
-        .modal-body { background: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 1.5rem; width: 100%; max-width: 400px; }
+        /* Modals */
+        .modal-overlay { position: fixed; inset: 0; background: var(--overlay); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 100; }
+        .modal-body { width: 100%; max-width: 420px; }
+        .modal-title { font-size: 1.1rem; font-weight: 900; margin-bottom: 1rem; }
         .hidden { display: none !important; }
-        .form-group { margin-bottom: 0.75rem; }
-        .form-group label { display: block; font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.25rem; }
-        .form-group input, .form-group select { width: 100%; background: #0f172a; border: 1px solid #334155; color: white; padding: 0.5rem; border-radius: 0.375rem; font-size: 0.8rem; color-scheme: dark; }
-        .form-hint { font-size: 0.65rem; color: #64748b; margin-top: 0.25rem; }
-        .form-error { font-size: 0.75rem; color: #fb7185; min-height: 1rem; }
+        .form-group { margin-bottom: 0.8rem; }
+        .form-group label { display: block; font-size: 0.8rem; color: var(--text-2); font-weight: 500; margin-bottom: 0.25rem; }
+        .form-group input, .form-group select { width: 100%; background: var(--surface-2); border: 1px solid var(--line); color: var(--text); padding: 0.55rem; border-radius: 4px; font-size: 0.9rem; }
+        .form-group input:focus, .form-group select:focus { outline: 2px solid var(--xm-blue); outline-offset: 0; border-color: transparent; }
+        .form-hint { font-size: 0.7rem; color: var(--muted); margin-top: 0.25rem; }
+        .form-error { font-size: 0.8rem; color: var(--neg); min-height: 1.1rem; }
         .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
 
-        .text-amber { color: #fcd34d; }
-        .text-emerald { color: #34d399; }
-        .text-rose { color: #fb7185; }
-        .text-cyan { color: #38bdf8; }
+        footer { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); }
+        footer strong { color: var(--brand-text); font-weight: 700; }
+
+        .text-pos { color: var(--pos); }
+        .text-neg { color: var(--neg); }
+        .text-warn { color: var(--warn); }
+        .text-brand { color: var(--brand-text); }
+
+        @media (max-width: 560px) {
+            .brand-divider, .brand-text { display: none; }
+            .fx-slider { width: 100%; }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <div class="logo-box">EM</div>
-                <div>
-                    <h1 style="font-size: 1.2rem; font-weight: bold; color: #f59e0b;">Experience Media</h1>
-                    <p style="font-size: 0.7rem; color: #94a3b8;">نظام حسابات وإدارة مشاريع شركة الدعاية والإعلان (SDG / EGP)</p>
+            <div class="brand">
+                <img src="brand/logo-horizontal-color.webp" alt="Experience Media — اكسبيرينس ميديا" class="brand-logo logo-light">
+                <img src="brand/logo-horizontal-reverse.webp" alt="Experience Media — اكسبيرينس ميديا" class="brand-logo logo-dark">
+                <div class="brand-divider"></div>
+                <div class="brand-text">
+                    <h1 class="brand-title">نظام الحسابات وإدارة المشاريع</h1>
+                    <p class="brand-sub">بالعملة المزدوجة: الجنيه السوداني والجنيه المصري</p>
                 </div>
             </div>
-            <div class="fx-bar">
-                <label for="fxRateInput" style="font-size: 0.75rem; font-weight: bold; color: #f59e0b;">سعر الصرف اليومي (سوق):</label>
-                <div style="display: flex; align-items: center; gap: 0.25rem;">
-                    <input type="number" id="fxRateInput" value="185" step="0.5" min="0.01" class="fx-input">
-                    <span style="font-size: 0.7rem; color: #94a3b8;">ج.س / 1 ج.م</span>
+            <div class="header-tools">
+                <div class="fx-bar">
+                    <label for="fxRateInput" class="fx-label">سعر الصرف اليوم</label>
+                    <div style="display: flex; align-items: center; gap: 0.35rem;">
+                        <input type="number" id="fxRateInput" value="185" step="0.5" min="0.01" class="fx-input">
+                        <span class="fx-unit">ج.س / 1 ج.م</span>
+                    </div>
+                    <input type="range" id="fxRateSlider" min="150" max="300" step="1" value="185" aria-label="سعر الصرف" class="fx-slider">
                 </div>
-                <input type="range" id="fxRateSlider" min="150" max="300" step="1" value="185" aria-label="سعر الصرف" style="width: 120px; accent-color: #f59e0b;">
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الفاتح والداكن" title="تبديل الوضع الفاتح والداكن">◐</button>
             </div>
         </div>
     </header>
@@ -111,46 +260,37 @@
             <div class="card">
                 <div class="card-header">
                     <span class="badge" id="prjCode">PRJ-001</span>
-                    <span style="font-size: 0.7rem; color: #94a3b8;">المشروع الفعلي المسجل</span>
+                    <span class="muted" style="font-size: 0.75rem;">المشروع الفعلي المسجل</span>
                 </div>
-                <h2 style="font-size: 1.1rem; font-weight: bold;" id="prjClient">العميل: —</h2>
-                <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem;" id="prjService">الخدمة: —</p>
-                <div style="margin-top: 1rem; font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                    <div style="display: flex; justify-content: space-between; color: #94a3b8;">
-                        <span>قيمة القطعة:</span>
-                        <span style="font-weight: bold; color: #f1f5f9;" id="unitPriceSdg">—</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; color: #94a3b8;">
-                        <span>إجمالي التعاقد (ج.س):</span>
-                        <span style="font-weight: bold; color: #fcd34d;" id="totalContractSdg">—</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; color: #94a3b8;">
-                        <span>إجمالي العقد المعادل (ج.م):</span>
-                        <span style="font-weight: bold; color: #34d399;" id="totalContractEgp">—</span>
-                    </div>
+                <h2 class="project-client" id="prjClient">العميل: —</h2>
+                <p class="project-service" id="prjService">الخدمة: —</p>
+                <div class="meta-list">
+                    <div class="meta-row"><span>قيمة القطعة:</span><strong id="unitPriceSdg">—</strong></div>
+                    <div class="meta-row"><span>إجمالي التعاقد (ج.س):</span><strong id="totalContractSdg">—</strong></div>
+                    <div class="meta-row"><span>إجمالي العقد المعادل (ج.م):</span><strong class="text-brand" id="totalContractEgp">—</strong></div>
                 </div>
             </div>
 
             <div class="grid-kpi span-2">
                 <div class="kpi-card">
                     <span class="kpi-title">المحصل الفعلي (ج.م)</span>
-                    <div class="kpi-val text-emerald" id="kpiReceivedEgp">—</div>
+                    <div class="kpi-val text-pos" id="kpiReceivedEgp">—</div>
                     <span class="kpi-sub" id="kpiReceivedSub">—</span>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-title">المتبقي عند العميل</span>
-                    <div class="kpi-val text-amber" id="kpiRemainingEgp">—</div>
+                    <div class="kpi-val text-warn" id="kpiRemainingEgp">—</div>
                     <span class="kpi-sub" id="kpiRemainingSub">—</span>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-title">إجمالي التكلفة الفعلية</span>
-                    <div class="kpi-val text-rose" id="kpiTotalCostEgp">—</div>
+                    <div class="kpi-val text-neg" id="kpiTotalCostEgp">—</div>
                     <span class="kpi-sub" id="kpiCostPerPiece">—</span>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-title">صافي الربح المتوقع</span>
-                    <div class="kpi-val text-cyan" id="kpiNetProfitEgp">—</div>
-                    <span class="kpi-sub text-emerald" id="kpiProfitMargin">—</span>
+                    <div class="kpi-val text-brand" id="kpiNetProfitEgp">—</div>
+                    <span class="kpi-sub text-pos" id="kpiProfitMargin">—</span>
                 </div>
             </div>
         </div>
@@ -159,20 +299,20 @@
             <div style="display: flex; align-items: center; gap: 0.75rem;">
                 <div class="alert-icon" id="cashAlertIcon">!</div>
                 <div>
-                    <h3 style="font-size: 0.85rem; font-weight: bold;" id="cashAlertTitle">—</h3>
-                    <p style="font-size: 0.75rem; color: #cbd5e1;" id="cashAlertText">—</p>
+                    <h3 class="alert-title" id="cashAlertTitle">—</h3>
+                    <p class="alert-text" id="cashAlertText">—</p>
                 </div>
             </div>
-            <div class="alert-value" style="font-size: 1.1rem; font-weight: 900;" id="cashAlertValue">—</div>
+            <div class="alert-value" id="cashAlertValue">—</div>
         </div>
 
         <div class="grid-2">
             <div class="card">
                 <div class="card-header">
-                    <h3 style="font-size: 0.95rem; font-weight: bold; color: #34d399;">سجل الدفعات المحصلة (Historical FX Lock)</h3>
-                    <button type="button" data-action="add-payment" class="btn btn-green">+ إضافة دفعة</button>
+                    <h3 class="card-title">سجل الدفعات المحصلة <small>(سعر صرف مثبّت)</small></h3>
+                    <button type="button" data-action="add-payment" class="btn btn-primary">+ إضافة دفعة</button>
                 </div>
-                <div style="overflow-x: auto;">
+                <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
@@ -190,10 +330,10 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 style="font-size: 0.95rem; font-weight: bold; color: #fb7185;">سجل المصروفات والتكاليف</h3>
-                    <button type="button" data-action="add-expense" class="btn btn-red">+ إضافة مصروف</button>
+                    <h3 class="card-title">سجل المصروفات والتكاليف</h3>
+                    <button type="button" data-action="add-expense" class="btn btn-secondary">+ إضافة مصروف</button>
                 </div>
-                <div style="overflow-x: auto;">
+                <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
@@ -214,20 +354,20 @@
         <div class="grid-2">
             <div class="card">
                 <div class="card-header">
-                    <h3 style="font-size: 0.95rem; font-weight: bold; color: #fcd34d;">متابعة مراحل التنفيذ (Workflow Tracker)</h3>
+                    <h3 class="card-title">متابعة مراحل التنفيذ</h3>
                     <span class="badge" id="workflowProgressText">0% مكتمل</span>
                 </div>
                 <div class="progress-bar-bg">
                     <div id="workflowProgressBar" class="progress-bar-fill"></div>
                 </div>
-                <div id="workflowStepsContainer" style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem; margin-top: 0.75rem;"></div>
+                <div id="workflowStepsContainer" class="steps"></div>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <h3 style="font-size: 0.95rem; font-weight: bold; color: #38bdf8;" id="fxMatrixTitle">حساسية سعر الصرف للدفعة المتبقية</h3>
+                    <h3 class="card-title" id="fxMatrixTitle">حساسية سعر الصرف للدفعة المتبقية</h3>
                 </div>
-                <div style="overflow-x: auto;">
+                <div class="table-wrap">
                     <table style="text-align: center;">
                         <thead>
                             <tr>
@@ -242,16 +382,21 @@
                     </table>
                 </div>
                 <p class="matrix-note" id="fxMatrixNote"></p>
-                <div style="margin-top: 1rem; height: 180px; position: relative;">
+                <div class="chart-box">
                     <canvas id="profitChartCanvas" style="width: 100%; height: 100%;"></canvas>
                 </div>
             </div>
         </div>
     </main>
 
+    <footer>
+        <span><strong>اكسبيرينس ميديا</strong> · نصنع تجارب إعلامية ترسخ في الأذهان</span>
+        <span>البيانات محفوظة على هذا المتصفح فقط</span>
+    </footer>
+
     <div id="paymentModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
-        <form class="modal-body" id="paymentForm" novalidate>
-            <h3 id="paymentModalTitle" style="font-size: 1rem; font-weight: bold; color: #34d399; margin-bottom: 1rem;">إضافة دفعة جديدة</h3>
+        <form class="modal-body card" id="paymentForm" novalidate>
+            <h3 id="paymentModalTitle" class="modal-title">إضافة دفعة جديدة</h3>
             <div class="form-group">
                 <label for="payTitle">بيان الدفعة</label>
                 <input type="text" id="payTitle" placeholder="مثال: الدفعة الثانية">
@@ -271,15 +416,15 @@
             </div>
             <p class="form-error" id="paymentError" role="alert"></p>
             <div class="modal-actions">
-                <button type="button" data-action="close-modal" class="btn btn-muted">إلغاء</button>
-                <button type="submit" class="btn btn-green">حفظ الدفعة</button>
+                <button type="button" data-action="close-modal" class="btn btn-quiet">إلغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ الدفعة</button>
             </div>
         </form>
     </div>
 
     <div id="expenseModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="expenseModalTitle">
-        <form class="modal-body" id="expenseForm" novalidate>
-            <h3 id="expenseModalTitle" style="font-size: 1rem; font-weight: bold; color: #fb7185; margin-bottom: 1rem;">إضافة مصروف جديد</h3>
+        <form class="modal-body card" id="expenseForm" novalidate>
+            <h3 id="expenseModalTitle" class="modal-title">إضافة مصروف جديد</h3>
             <div class="form-group">
                 <label for="expTitle">بند المصروف</label>
                 <input type="text" id="expTitle" placeholder="مثال: مصاريف نثرية">
@@ -306,14 +451,15 @@
             </div>
             <p class="form-error" id="expenseError" role="alert"></p>
             <div class="modal-actions">
-                <button type="button" data-action="close-modal" class="btn btn-muted">إلغاء</button>
-                <button type="submit" class="btn btn-red">حفظ المصروف</button>
+                <button type="button" data-action="close-modal" class="btn btn-quiet">إلغاء</button>
+                <button type="submit" class="btn btn-primary">حفظ المصروف</button>
             </div>
         </form>
     </div>
 
     <script>
         const STORAGE_KEY = 'exp_media_dashboard';
+        const THEME_KEY = 'exp_media_theme';
         const SCHEMA_VERSION = 2;
 
         const defaultData = {
@@ -385,6 +531,11 @@
             return '‎' + new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 }).format(num);
         }
 
+        // Isolated LTR run so the percent sign stays after the number in RTL text.
+        function formatPct(num) {
+            return `⁦${num.toFixed(1)}%⁩`;
+        }
+
         function formatCompact(num) {
             return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(num);
         }
@@ -447,9 +598,9 @@
                 return `
                     <tr>
                         <td><div class="cell-title">${escapeHtml(p.title)}</div><div class="cell-date">${formatDate(p.date)}</div></td>
-                        <td class="text-amber">${formatNum(p.sdg)} ج.س</td>
-                        <td style="color: #94a3b8;">${formatNum(p.fxRate)}</td>
-                        <td class="text-emerald" style="font-weight: bold;">${formatNum(egpVal)} ج.م</td>
+                        <td>${formatNum(p.sdg)} ج.س</td>
+                        <td class="muted">${formatNum(p.fxRate)}</td>
+                        <td class="text-pos strong">${formatNum(egpVal)} ج.م</td>
                         ${actionButtons('payment', p.id)}
                     </tr>`;
             });
@@ -469,10 +620,10 @@
                 return `
                     <tr>
                         <td><div class="cell-title">${escapeHtml(e.title)}</div><div class="cell-date">${formatDate(e.date)}</div></td>
-                        <td style="color: #cbd5e1;">${formatNum(e.amount)} ${e.currency === 'EGP' ? 'ج.م' : 'ج.س'}</td>
-                        <td style="color: #94a3b8;">${formatNum(e.fxRate)}</td>
-                        <td class="text-rose" style="font-weight: bold;">${formatNum(egp)} ج.م</td>
-                        <td style="color: #94a3b8;">${formatNum(sdg)} ج.س</td>
+                        <td>${formatNum(e.amount)} ${e.currency === 'EGP' ? 'ج.م' : 'ج.س'}</td>
+                        <td class="muted">${formatNum(e.fxRate)}</td>
+                        <td class="text-neg strong">${formatNum(egp)} ج.م</td>
+                        <td class="muted">${formatNum(sdg)} ج.س</td>
                         ${actionButtons('expense', e.id)}
                     </tr>`;
             });
@@ -505,10 +656,10 @@
 
             const profitEl = document.getElementById('kpiNetProfitEgp');
             profitEl.innerText = `${formatNum(expectedNetProfitEgp)} ج.م`;
-            profitEl.className = `kpi-val ${expectedNetProfitEgp >= 0 ? 'text-cyan' : 'text-rose'}`;
+            profitEl.className = `kpi-val ${expectedNetProfitEgp >= 0 ? 'text-brand' : 'text-neg'}`;
             const marginEl = document.getElementById('kpiProfitMargin');
-            marginEl.innerText = `هامش ربح: ${profitMargin.toFixed(1)}%`;
-            marginEl.className = `kpi-sub ${profitMargin >= 0 ? 'text-emerald' : 'text-rose'}`;
+            marginEl.innerText = `هامش ربح: ${formatPct(profitMargin)}`;
+            marginEl.className = `kpi-sub ${profitMargin >= 0 ? 'text-pos' : 'text-neg'}`;
 
             renderCashAlert(remainingSdg, cashGap, totalReceivedEgp, totalCostEgp);
             renderWorkflow();
@@ -549,13 +700,14 @@
         function renderWorkflow() {
             const container = document.getElementById('workflowStepsContainer');
             let completedCount = 0;
+            const stepClass = { completed: 'done', in_progress: 'active', pending: '' };
 
             container.innerHTML = appData.workflow.map(step => {
                 if (step.status === 'completed') completedCount++;
                 return `
-                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; background: rgba(15, 23, 42, 0.6); padding: 0.5rem; border-radius: 0.5rem; border: 1px solid rgba(51, 65, 85, 0.5);">
-                        <span style="${step.status === 'completed' ? 'text-decoration: line-through; color: #64748b;' : 'color: #f1f5f9;'}">${escapeHtml(step.name)}</span>
-                        <select data-step-id="${step.id}" aria-label="حالة المرحلة" style="background: #1e293b; border: 1px solid #475569; color: white; border-radius: 0.25rem; font-size: 0.7rem; padding: 0.2rem;">
+                    <div class="step ${stepClass[step.status] || ''}">
+                        <span class="step-name">${escapeHtml(step.name)}</span>
+                        <select data-step-id="${step.id}" aria-label="حالة المرحلة" class="step-select">
                             <option value="pending" ${step.status === 'pending' ? 'selected' : ''}>قيد الانتظار</option>
                             <option value="in_progress" ${step.status === 'in_progress' ? 'selected' : ''}>قيد التنفيذ</option>
                             <option value="completed" ${step.status === 'completed' ? 'selected' : ''}>مكتمل</option>
@@ -564,7 +716,7 @@
             }).join('');
 
             const percent = appData.workflow.length ? Math.round((completedCount / appData.workflow.length) * 100) : 0;
-            document.getElementById('workflowProgressText').innerText = `${percent}% مكتمل`;
+            document.getElementById('workflowProgressText').innerText = `⁦${percent}%⁩ مكتمل`;
             document.getElementById('workflowProgressBar').style.width = `${percent}%`;
         }
 
@@ -605,8 +757,8 @@
                         <td>${formatNum(rate)}${isCurrent ? '<span class="tag tag-current">اليوم</span>' : ''}${isBreakEven ? '<span class="tag tag-breakeven">نقطة التعادل</span>' : ''}</td>
                         <td>${formatNum(remEgp)}</td>
                         <td>${formatNum(totalContract)}</td>
-                        <td style="${profit < 0 ? 'color:#f43f5e;' : 'color:#34d399;'} font-weight:bold;">${formatNum(profit)}</td>
-                        <td>${margin.toFixed(1)}%</td>
+                        <td class="strong ${profit < 0 ? 'text-neg' : 'text-pos'}">${formatNum(profit)}</td>
+                        <td>${formatPct(margin)}</td>
                     </tr>`;
             });
             document.getElementById('fxMatrixBody').innerHTML = rows.join('');
@@ -624,6 +776,10 @@
             drawCanvasChart(chartPoints, breakEven && breakEven <= currentFx * 2 ? breakEven : null);
         }
 
+        function cssVar(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        }
+
         function drawCanvasChart(points, breakEven) {
             const canvas = document.getElementById('profitChartCanvas');
             if (!canvas || points.length < 2) return;
@@ -635,6 +791,9 @@
             canvas.height = cssH * dpr;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             ctx.clearRect(0, 0, cssW, cssH);
+
+            const colors = { brand: cssVar('--xm-blue'), line: cssVar('--line'), muted: cssVar('--muted'), pos: cssVar('--pos'), neg: cssVar('--neg') };
+            const font = `500 11px ${getComputedStyle(document.body).fontFamily}`;
 
             const padL = 48, padR = 16, padT = 14, padB = 26;
             const w = cssW - padL - padR;
@@ -648,13 +807,13 @@
             const yOf = profit => padT + h - ((profit - minP) / (maxP - minP || 1)) * h;
 
             ctx.direction = 'ltr';
-            ctx.font = '10px sans-serif';
-            ctx.fillStyle = '#64748b';
+            ctx.font = font;
+            ctx.fillStyle = colors.muted;
             ctx.textAlign = 'right';
-            ctx.fillText(formatCompact(maxP), padL - 6, yOf(maxP) + 3);
-            ctx.fillText(formatCompact(minP), padL - 6, yOf(minP) + 3);
+            ctx.fillText(formatCompact(maxP), padL - 6, yOf(maxP) + 4);
+            ctx.fillText(formatCompact(minP), padL - 6, yOf(minP) + 4);
 
-            ctx.strokeStyle = '#334155';
+            ctx.strokeStyle = colors.line;
             ctx.lineWidth = 1;
             ctx.setLineDash([]);
             ctx.beginPath();
@@ -665,15 +824,15 @@
 
             // Zero-profit line
             ctx.setLineDash([4, 4]);
-            ctx.strokeStyle = '#475569';
+            ctx.strokeStyle = colors.muted;
             ctx.beginPath();
             ctx.moveTo(padL, yOf(0));
             ctx.lineTo(padL + w, yOf(0));
             ctx.stroke();
-            ctx.fillText('0', padL - 6, yOf(0) + 3);
+            ctx.fillText('0', padL - 6, yOf(0) + 4);
 
             if (breakEven) {
-                ctx.strokeStyle = '#e11d48';
+                ctx.strokeStyle = colors.neg;
                 ctx.beginPath();
                 ctx.moveTo(xOf(breakEven), padT);
                 ctx.lineTo(xOf(breakEven), padT + h);
@@ -681,8 +840,9 @@
             }
             ctx.setLineDash([]);
 
-            ctx.strokeStyle = '#38bdf8';
+            ctx.strokeStyle = colors.brand;
             ctx.lineWidth = 3;
+            ctx.lineJoin = 'round';
             ctx.beginPath();
             points.forEach((p, idx) => {
                 if (idx === 0) ctx.moveTo(xOf(p.rate), yOf(p.profit));
@@ -694,17 +854,31 @@
             let lastLabelX = -Infinity;
             points.forEach(p => {
                 const x = xOf(p.rate);
-                ctx.fillStyle = p.profit < 0 ? '#f43f5e' : '#10b981';
+                ctx.fillStyle = p.profit < 0 ? colors.neg : colors.pos;
                 ctx.beginPath();
-                ctx.arc(x, yOf(p.profit), 4, 0, Math.PI * 2);
+                ctx.arc(x, yOf(p.profit), 4.5, 0, Math.PI * 2);
                 ctx.fill();
 
                 if (x - lastLabelX >= 30) {
-                    ctx.fillStyle = '#94a3b8';
-                    ctx.fillText(formatNum(p.rate), x, padT + h + 15);
+                    ctx.fillStyle = colors.muted;
+                    ctx.fillText(formatNum(p.rate), x, padT + h + 16);
                     lastLabelX = x;
                 }
             });
+        }
+
+        // ---------- Theme ----------
+        function isDarkTheme() {
+            const explicit = document.documentElement.dataset.theme;
+            if (explicit) return explicit === 'dark';
+            return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        function toggleTheme() {
+            const next = isDarkTheme() ? 'light' : 'dark';
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem(THEME_KEY, next); } catch (err) { /* storage unavailable */ }
+            render();
         }
 
         // ---------- Modals ----------
@@ -838,11 +1012,17 @@
             saveData();
         });
 
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        // Redraw the chart when the system theme flips and no explicit theme is set.
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(render, 150);
         });
+        // Fonts change text metrics; redraw the canvas once the brand font is ready.
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
         render();
     </script>
 </body>
