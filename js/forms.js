@@ -256,7 +256,7 @@ function openPartyForm(kind, id) {
         title: item ? `تعديل ${label}` : `إضافة ${kind === 'client' ? 'عميل' : 'مورد'}`,
         fields: [
             { name: 'name', label: 'الاسم', value: item ? item.name : '' },
-            { name: 'phone', label: 'الهاتف', value: item ? item.phone : '' },
+            { name: 'phone', label: 'الهاتف', value: item ? item.phone : '', placeholder: '+249912345678', hint: kind === 'client' ? 'بالصيغة الدولية (يبدأ بـ +) ليفتح واتساب محادثة العميل مباشرة.' : '' },
             { name: 'notes', label: 'ملاحظات', type: 'textarea', value: item ? item.notes : '' }
         ],
         onSubmit: v => {

@@ -104,6 +104,9 @@ header { background-color: var(--surface); border-bottom: 3px solid var(--xm-blu
 .fx-input:focus { outline: 2px solid var(--xm-blue); outline-offset: 1px; }
 .theme-toggle { background: var(--surface-2); color: var(--text-2); border: 0; border-radius: 12px; width: 40px; height: 40px; cursor: pointer; font-size: 1.05rem; }
 .theme-toggle:hover { color: var(--brand-text); }
+.sync-badge { border: 0; cursor: pointer; font-family: inherit; font-size: 0.75rem; padding: 0.35rem 0.8rem; }
+.search-input { flex: 1; max-width: 360px; background: var(--surface-2); border: 1px solid var(--line); color: var(--text); padding: 0.45rem 0.7rem; border-radius: 4px; font-size: 0.85rem; }
+.search-input:focus { outline: 2px solid var(--xm-blue); outline-offset: 0; border-color: transparent; }
 
 .nav { max-width: 1200px; margin: 0 auto; padding: 0.6rem 1rem 0; display: flex; gap: 0.25rem; overflow-x: auto; scrollbar-width: none; }
 .nav a { padding: 0.5rem 0.9rem 0.65rem; color: var(--text-2); font-weight: 500; font-size: 0.9rem; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -3px; }

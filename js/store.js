@@ -104,7 +104,7 @@ function normalize(data) {
     data.settings = { ...clone(DEFAULT_SETTINGS), ...data.settings };
     data.settings.company = { ...DEFAULT_SETTINGS.company, ...data.settings.company };
     if (!Array.isArray(data.fxRates) || !data.fxRates.length) data.fxRates = [{ id: newId(), date: todayIso(), egp: LEGACY_DEFAULT.fxRate, usd: null }];
-    ['clients', 'suppliers', 'projects', 'quotes'].forEach(key => { if (!Array.isArray(data[key])) data[key] = []; });
+    ['clients', 'suppliers', 'projects', 'quotes', 'auditLog'].forEach(key => { if (!Array.isArray(data[key])) data[key] = []; });
     if (!Array.isArray(data.workflowTemplates) || !data.workflowTemplates.length) data.workflowTemplates = clone(DEFAULT_TEMPLATES);
     data.projects.forEach(p => {
         ['payments', 'expenses', 'schedule', 'workflow'].forEach(key => { if (!Array.isArray(p[key])) p[key] = []; });
@@ -134,8 +134,11 @@ function loadData() {
 
 let appData = loadData();
 
+// Every change goes through here: record it in the change log, store it, queue it for cloud sync.
 function saveData() {
+    recordAudit();
     persist(appData);
+    markDirty();
     render();
 }
 

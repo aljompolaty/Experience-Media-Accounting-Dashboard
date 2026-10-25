@@ -128,7 +128,7 @@ function renderOverview() {
         </tr>`);
 
     el('app').innerHTML = `
-        ${viewHeader('لوحة المتابعة العامة', `كل المشاريع بسعر اليوم ${formatNum(cur.egp)} ج.س للجنيه المصري`, '<button type="button" class="btn btn-primary" data-action="new-project">+ مشروع جديد</button>')}
+        ${viewHeader('لوحة المتابعة العامة', `كل المشاريع بسعر اليوم ${formatNum(cur.egp)} ج.س للجنيه المصري`, '<button type="button" class="btn btn-quiet" data-action="export-excel">تصدير Excel</button><button type="button" class="btn btn-primary" data-action="new-project">+ مشروع جديد</button>')}
         <div class="grid-kpi">
             ${kpiCard('المشاريع النشطة', `${active.length} / ${rows.length}`, 'نشط / الإجمالي')}
             ${kpiCard('المحصل من العملاء', formatMoney(sum('receivedEgp'), 'EGP'), 'بأسعار الصرف المثبتة', 'text-pos')}
@@ -256,6 +256,7 @@ function renderProject(route) {
                 <h2 class="page-title">${escapeHtml(p.code)} · ${escapeHtml(clientName(p.clientId))}</h2>
             </div>
             <div class="view-actions">
+                <button type="button" class="btn btn-quiet" data-action="share-statement"${dataAttrs(ids)}>إرسال الكشف عبر واتساب</button>
                 <button type="button" class="btn btn-quiet" data-action="print-invoice"${dataAttrs(ids)}>طباعة كشف الحساب</button>
                 <button type="button" class="btn btn-secondary" data-action="edit-project"${dataAttrs(ids)}>تعديل المشروع</button>
                 <button type="button" class="icon-btn danger" data-action="delete-project"${dataAttrs(ids)} title="حذف المشروع" aria-label="حذف المشروع">✕</button>
@@ -574,7 +575,7 @@ function renderQuotes() {
                 <td class="strong">${formatMoney(quoteTotal(q), q.currency)}</td>
                 <td>${pill(QUOTE_STATUS[q.status], tones[q.status])}</td>
                 <td>${project ? `<a href="#/project/${project.id}">${escapeHtml(project.code)}</a>` : `<button type="button" class="btn btn-primary btn-sm" data-action="convert-quote"${dataAttrs({ id: q.id })}>تحويل إلى مشروع</button>`}</td>
-                ${rowActions('quote', { id: q.id }, `<button type="button" class="btn btn-quiet btn-sm" data-action="print-quote"${dataAttrs({ id: q.id })}>طباعة</button>`)}
+                ${rowActions('quote', { id: q.id }, `<button type="button" class="btn btn-quiet btn-sm" data-action="share-quote"${dataAttrs({ id: q.id })}>واتساب</button><button type="button" class="btn btn-quiet btn-sm" data-action="print-quote"${dataAttrs({ id: q.id })}>طباعة</button>`)}
             </tr>`;
     });
 
@@ -608,7 +609,11 @@ function renderSettings() {
         </div>`).join('');
 
     el('app').innerHTML = `
-        ${viewHeader('الإعدادات', 'بيانات الشركة على المستندات، وحدود التنبيه، وقوالب المراحل، والنسخ الاحتياطي', '<button type="button" class="btn btn-primary" data-action="save-settings">حفظ الإعدادات</button>')}
+        ${viewHeader('الإعدادات', 'المزامنة السحابية، وبيانات الشركة على المستندات، وحدود التنبيه، وقوالب المراحل، والنسخ الاحتياطي', '<button type="button" class="btn btn-primary" data-action="save-settings">حفظ الإعدادات</button>')}
+        <div class="card" id="cloud">
+            <div class="card-header"><h3 class="card-title">المزامنة السحابية بين الأجهزة</h3></div>
+            ${cloudSettingsHtml()}
+        </div>
         <div class="grid-2">
             <div class="card">
                 <div class="card-header"><h3 class="card-title">بيانات الشركة على المستندات</h3></div>
@@ -644,11 +649,12 @@ function renderSettings() {
             <div class="templates-grid">${templates}</div>
         </div>
         <div class="card">
-            <div class="card-header"><h3 class="card-title">النسخ الاحتياطي</h3></div>
-            <p class="alert-text" style="margin-bottom: 1rem;">البيانات محفوظة على هذا المتصفح فقط. نزّل نسخة احتياطية دوريًا، واستوردها لنقل البيانات إلى جهاز آخر.</p>
+            <div class="card-header"><h3 class="card-title">النسخ الاحتياطي والتصدير</h3></div>
+            <p class="alert-text" style="margin-bottom: 1rem;">ملف JSON نسخة كاملة يمكن استيرادها لاحقًا. ملف Excel للقراءة والتحليل، ويُفتح مباشرة في Google Sheets (ملف ← استيراد).</p>
             <div class="view-actions">
-                <button type="button" class="btn btn-primary" data-action="export-data">تنزيل نسخة احتياطية</button>
+                <button type="button" class="btn btn-primary" data-action="export-data">تنزيل نسخة احتياطية (JSON)</button>
                 <label for="importFile" class="btn btn-secondary">استيراد نسخة احتياطية</label>
+                <button type="button" class="btn btn-quiet" data-action="export-excel">تصدير Excel / Google Sheets</button>
             </div>
         </div>`;
 }

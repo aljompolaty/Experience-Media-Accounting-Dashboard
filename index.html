@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience Media - نظام الحسابات وإدارة المشاريع</title>
     <link rel="icon" href="brand/logo-mark-color.webp" type="image/webp">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <meta name="theme-color" content="#00ADEF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="XM حسابات">
     <script>
         // Apply the saved theme before first paint to avoid a flash of the wrong theme.
         try {
@@ -12,7 +17,7 @@
             if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
         } catch (err) { /* storage unavailable */ }
     </script>
-    <link rel="stylesheet" href="css/app.css?v=3.1">
+    <link rel="stylesheet" href="css/app.css?v=4.1">
 </head>
 <body>
     <header>
@@ -40,6 +45,7 @@
                         <span>ج.س</span>
                     </label>
                 </div>
+                <button type="button" class="sync-badge pill hidden" id="syncBadge"></button>
                 <button type="button" class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الفاتح والداكن" title="تبديل الوضع الفاتح والداكن">◐</button>
             </div>
         </div>
@@ -50,7 +56,7 @@
 
     <footer>
         <span><strong>اكسبيرينس ميديا</strong> · نصنع تجارب إعلامية ترسخ في الأذهان</span>
-        <span>البيانات محفوظة على هذا المتصفح فقط · نزّل نسخة احتياطية من <a href="#/settings">الإعدادات</a></span>
+        <span>تعمل دون إنترنت · المزامنة والنسخ الاحتياطي من <a href="#/settings">الإعدادات</a></span>
     </footer>
 
     <div id="formModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -69,13 +75,16 @@
     <input type="file" id="importFile" accept="application/json,.json" hidden>
     <div id="printArea"></div>
 
-    <script src="js/util.js?v=3.1"></script>
-    <script src="js/store.js?v=3.1"></script>
-    <script src="js/calc.js?v=3.1"></script>
-    <script src="js/ui.js?v=3.1"></script>
-    <script src="js/forms.js?v=3.1"></script>
-    <script src="js/views.js?v=3.1"></script>
-    <script src="js/print.js?v=3.1"></script>
-    <script src="js/app.js?v=3.1"></script>
+    <script src="js/util.js?v=4.1"></script>
+    <script src="js/store.js?v=4.1"></script>
+    <script src="js/calc.js?v=4.1"></script>
+    <script src="js/ui.js?v=4.1"></script>
+    <script src="js/forms.js?v=4.1"></script>
+    <script src="js/views.js?v=4.1"></script>
+    <script src="js/audit.js?v=4.1"></script>
+    <script src="js/sync.js?v=4.1"></script>
+    <script src="js/share.js?v=4.1"></script>
+    <script src="js/print.js?v=4.1"></script>
+    <script src="js/app.js?v=4.1"></script>
 </body>
 </html>

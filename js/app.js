@@ -8,6 +8,7 @@ const VIEWS = {
     cashflow: renderCashflow,
     fx: renderFx,
     quotes: renderQuotes,
+    activity: renderActivity,
     settings: renderSettings
 };
 
@@ -18,6 +19,7 @@ const NAV = [
     ['cashflow', '#/cashflow', 'التدفق النقدي'],
     ['fx', '#/fx', 'أسعار الصرف'],
     ['quotes', '#/quotes', 'عروض الأسعار'],
+    ['activity', '#/activity', 'سجل التغييرات'],
     ['settings', '#/settings', 'الإعدادات']
 ];
 
@@ -96,6 +98,9 @@ function importData(file) {
         }
         if (!confirm(`سيتم استبدال كل البيانات الحالية بالنسخة المستوردة (${data.projects.length} مشروع). متابعة؟`)) return;
         appData = data;
+        // Log the import as one entry instead of diffing every imported record as an addition.
+        resetAuditBaseline();
+        addAuditEntries([auditEntry('import', 'نسخة احتياطية', file.name, `${data.projects.length} مشروع`)]);
         saveData();
         showToast('تم استيراد النسخة الاحتياطية');
     };
@@ -112,6 +117,15 @@ const ACTIONS = {
     'edit-project': d => openProjectForm(getProject(d.pid)),
     'delete-project': d => deleteProject(d.pid),
     'print-invoice': d => printProjectStatement(d.pid),
+    'share-statement': d => shareProjectStatement(d.pid),
+    'share-quote': d => shareQuote(d.id),
+    'export-excel': () => exportExcel(),
+
+    'cloud-connect': () => connectCloud(),
+    'cloud-signin': () => signInCloud(),
+    'cloud-signout': () => signOutCloud(),
+    'cloud-disconnect': () => disconnectCloud(),
+    'cloud-sync': () => pullFromCloud(),
 
     'add-payment': d => openPaymentForm(d.pid, null),
     'edit-payment': d => openPaymentForm(d.pid, d.id),
@@ -216,6 +230,7 @@ el('importFile').addEventListener('change', (ev) => {
 });
 
 el('themeToggle').addEventListener('click', toggleTheme);
+el('syncBadge').addEventListener('click', onSyncBadgeClick);
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
 window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
 
@@ -226,4 +241,11 @@ window.addEventListener('resize', () => {
 });
 // Fonts change text metrics; redraw the canvases once the brand font is ready.
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+resetAuditBaseline();
 render();
+initCloud();
+
+// Offline support and "install as app". Service workers need http(s), not a file:// page.
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    navigator.serviceWorker.register('sw.js').catch(err => console.warn('Service worker registration failed', err));
+}
