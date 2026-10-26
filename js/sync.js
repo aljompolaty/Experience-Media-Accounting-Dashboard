@@ -47,6 +47,8 @@ function loadScript(src) {
 
 // ---------- Status badge ----------
 const SYNC_BADGE = {
+    // Shown on purpose: a device that is not linked keeps its data to itself, which is easy to miss.
+    off: ['غير مرتبط بالسحابة', 'warn'],
     'signed-out': ['سجّل الدخول للمزامنة', 'warn'],
     syncing: ['جارٍ المزامنة…', 'brand'],
     synced: ['متزامن ✓', 'pos'],
@@ -117,11 +119,12 @@ function adoptRemote(row) {
     showToast('تم تحميل أحدث نسخة من السحابة');
 }
 
-async function pullFromCloud() {
+// quiet: background checks keep the badge as it is unless something actually changes.
+async function pullFromCloud({ quiet = false } = {}) {
     if (!cloudClient || !cloudUser) return;
     if (!navigator.onLine) { setSyncStatus('offline'); return; }
     lastPullAt = Date.now();
-    setSyncStatus('syncing');
+    if (!quiet) setSyncStatus('syncing');
 
     const { data: row, error } = await cloudClient
         .from('workspaces').select('data, revision, device, updated_at').eq('user_id', cloudUser.id).maybeSingle();
@@ -307,7 +310,14 @@ function onSyncBadgeClick() {
 
 window.addEventListener('online', () => { if (cloudUser) pullFromCloud(); });
 window.addEventListener('offline', () => { if (cloudUser) setSyncStatus('offline'); });
-// Catch changes made on another device when coming back to this one.
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && cloudUser && Date.now() - lastPullAt > 20000) pullFromCloud();
-});
+
+// Picks up changes made on another device while this one stays open. Skipped while a form is
+// open: replacing the data under it would make its save edit an object that no longer exists.
+function backgroundPull(minGapMs) {
+    if (!cloudUser || pushing || activeForm || document.visibilityState !== 'visible') return;
+    if (syncStatus.state === 'conflict' || Date.now() - lastPullAt < minGapMs) return;
+    pullFromCloud({ quiet: true });
+}
+document.addEventListener('visibilitychange', () => backgroundPull(5000));
+window.addEventListener('focus', () => backgroundPull(5000));
+setInterval(() => backgroundPull(30000), 10000);

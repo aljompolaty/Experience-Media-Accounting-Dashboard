@@ -1,7 +1,7 @@
 /* Service worker: keeps the app usable offline.
    Bump VERSION together with the ?v= query in index.html whenever a CSS/JS file changes. */
 
-const VERSION = '4.1';
+const VERSION = '4.2';
 const CACHE = `xm-dashboard-v${VERSION}`;
 
 const APP_SHELL = [
